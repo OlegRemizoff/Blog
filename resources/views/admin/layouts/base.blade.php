@@ -4,7 +4,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | Blank Page</title>
+  <!-- <title>AdminLTE 3 | Blank Page</title> -->
+  <title>@section('title')AdminLTE 3 |@show</title>e</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -25,7 +26,7 @@
           <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-          <a href="../../index3.html" class="nav-link">Home</a>
+          <a href="{{ route('admin.index') }}" class="nav-link">Home</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
           <a href="#" class="nav-link">Contact</a>
@@ -196,31 +197,25 @@
                 <p>Главная</p>
               </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item has-treeview">
               <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-tachometer-alt"></i>
+                <i class="nav-icon fas fa-archive"></i>
                 <p>
-                  Dashboard
+                  Категории
                   <i class="right fas fa-angle-left"></i>
                 </p>
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="../../index.html" class="nav-link">
+                  <a href="{{ route('admin.categories.index') }}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Dashboard v1</p>
+                    <p>Список категорий</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="../../index2.html" class="nav-link">
+                  <a href="{{ route('admin.categories.create') }}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Dashboard v2</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="../../index3.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Dashboard v3</p>
+                    <p>Новая категория</p>
                   </a>
                 </li>
               </ul>
@@ -233,7 +228,29 @@
     </aside>
 
     <!-- Content Wrapper. Contains page content -->
-     @yield('content')
+    <div class="content-wrapper">
+      <div class="container mt-2">
+        <div class="row">
+          <div class="col-12">
+            @if ($errors->any())
+            <div class="alert alert-danger">
+              <ul class="list-unstyled">
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+              </ul>
+            </div>
+            @endif
+            @if (session()->has('success')) <!-- ключ success указали в store -->
+            <div class="alert alert-success">
+              {{ session('success') }}
+            </div>
+            @endif
+          </div>
+        </div>
+      </div>
+      @yield('content')
+    </div>
     <!-- /.content-wrapper -->
 
     <footer class="main-footer">
@@ -258,7 +275,7 @@
   <!-- AdminLTE App -->
   <script src="{{ asset('assets/admin/js/adminlte.min.js') }}"></script>
   <!-- AdminLTE for demo purposes -->
-{{--<script src="{{ asset('assets/admin/js/demo.js') }}"></script>--}}
+  {{--<script src="{{ asset('assets/admin/js/demo.js') }}"></script>--}}
   <!-- {{ asset('assets/admin/') }} -->
 </body>
 

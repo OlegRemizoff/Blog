@@ -12,10 +12,9 @@ class MainController extends Controller
 
 public function index() {
 
-
-    $tag = new Tag();
-    $tag->title = 'marvel';
-    $tag->save();
+    // $tag = new Tag();
+    // $tag->title = 'marvel';
+    // $tag->save();
     return view('admin.index');
 }
 

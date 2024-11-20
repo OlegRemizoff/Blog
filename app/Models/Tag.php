@@ -16,8 +16,9 @@ class Tag extends Model
 
     protected $fillable = ['title'];
 
-    public function posts () {
-        return $this->belongsToMany(Post::class);
+    public function posts(): BelongsToMany
+    {
+        return $this->belongsToMany(Post::class)->withTimestamps();
     }
 
     public function getSlugOptions() : SlugOptions

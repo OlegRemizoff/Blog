@@ -7,8 +7,12 @@
 
 /* eslint-disable camelcase */
 
+
 (function ($) {
   'use strict'
+
+  //Initialize Select2 Elements
+  $('.select2').select2()
 
   setTimeout(function () {
     if (window.___browserSync___ === undefined && Number(localStorage.getItem('AdminLTE:Demo:MessageShowed')) < Date.now()) {

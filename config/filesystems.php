@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('FILESYSTEM_DISK', 'local'),
+    'default' => env('FILESYSTEM_DISK', 'local'), // default - local, не забыть поменять если есть в env. 
 
     /*
     |--------------------------------------------------------------------------
@@ -38,11 +38,19 @@ return [
 
         'public' => [
             'driver' => 'local',
-            'root' => storage_path('app/public'),
+            'root' => public_path('uplods'),  // app/public/uplods, publick_path - helper 
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
             'throw' => false,
         ],
+
+        // 'public' => [
+        //     'driver' => 'local',
+        //     'root' => storage_path('app/public'),
+        //     'url' => env('APP_URL').'/storage',
+        //     'visibility' => 'public',
+        //     'throw' => false,
+        // ],
 
         's3' => [
             'driver' => 's3',

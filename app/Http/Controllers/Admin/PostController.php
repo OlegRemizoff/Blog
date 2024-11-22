@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Tag;
 use App\Models\Post;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -24,7 +25,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        $categories = Category::pluck('title', 'id')->all();
+        $categories = Category::pluck('title', 'id')->all();  // результат ['id' => 'titile']
         $tags = Tag::pluck('title', 'id')->all();
         return view('admin.posts.create', compact('categories', 'tags'));
     }
@@ -58,8 +59,11 @@ class PostController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
-    {
-        return view('admin.posts.edit');
+    {   
+        $post = Post::find($id);
+        $categories = Category::pluck('title', 'id')->all();
+        $tags = Tag::pluck('title', 'id')->all();
+        return view('admin.posts.edit', compact('categories', 'tags', 'post'));
     }
 
     /**
@@ -68,9 +72,24 @@ class PostController extends Controller
     public function update(Request $request, string $id)
     {
         $validated = $request->validate([
-            'title' => 'required'
+            'title' => 'required',
+            'description' => 'required',
+            'content' => 'required',
+            'category_id' => 'required|integer',
+            'thumbnail' => 'nullable|image',
         ]);
-        return redirect()->route('admin.posts.index');
+        $post = Post::find($id);
+        $data = $request->all();
+
+        if ($request->hasFile('thumbnail')) {
+            Storage::delete($post->thumbnail);
+            $folder = date('Y-m-d');
+            $request->file('thumbnail')->store("images/{$folder}");
+        }
+
+        $post->update($data);
+        $post->tags()->sync($request->tags);
+        return redirect()->route('admin.posts.index')->with('success', 'Изменения сохранены');
     }
 
     /**

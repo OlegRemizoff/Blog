@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+
 use App\Models\Category;
 use App\Models\Tag;
 use Spatie\Sluggable\HasSlug;
@@ -35,6 +38,21 @@ class Post extends Model
         return SlugOptions::create()
             ->generateSlugsFrom('title')
             ->saveSlugsTo('slug');
+    }
+
+    public static function uploadImage(Request $request, $image = null) {
+        if ($request->hasFile('thumbnail')) {
+            if ($image) {
+                Storage::delete($image);
+            }
+            $folder = date('Y-m-d');
+            return $request->file('thumbnail')->store("images/{$folder}");
+        }
+        return null;
+    }
+
+    public function getImage() {
+        return $this->thumbnail ? asset( 'uploads/' . $this->thumbnail) : asset('no-image.jpg');
     }
 
     

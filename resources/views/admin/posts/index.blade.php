@@ -49,7 +49,9 @@
                   @foreach($posts as $post)
                   <tr>
                     <td>{{ $post->id }}</td>
-                    <td>{{ $post->title }}</td>
+                    <td>
+                      <img src="{{ $post->getImage() }}" alt="" class="img-thumbnail mr-2" width="60">{{$post->title }}
+                    </td>
                     <td>{{ $post->category->title }}</td>
                     <td>{{ $post->tags->pluck('title')->join(', ') }}</td>
                     <td>{{ $post->created_at }}</td>

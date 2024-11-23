@@ -81,7 +81,9 @@
                                 </div>
                                 </div>
                             </div>
-                            <div>{{ $post->thumbnail }}</div>
+                            <div>
+                                <img src="{{ $post->getImage() }}" alt="" class="img-thumbnail" width="200">
+                            </div>
                         </div>
                         <!-- /.card-body -->
 

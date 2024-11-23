@@ -44,10 +44,8 @@ class PostController extends Controller
         ]);
         
         $data = $request->all();   
-        if ($request->hasFile('thumbnail')) {
-            $folder = date('Y-m-d');
-            $request->file('thumbnail')->store("images/{$folder}");
-        }
+        $data['thumbnail'] = Post::uploadImage($request);
+
         $post = Post::create($data);
         $post->tags()->sync($request->tags); // добавляем теги пришедшие из формы
 
@@ -78,14 +76,10 @@ class PostController extends Controller
             'category_id' => 'required|integer',
             'thumbnail' => 'nullable|image',
         ]);
+        
         $post = Post::find($id);
         $data = $request->all();
-
-        if ($request->hasFile('thumbnail')) {
-            Storage::delete($post->thumbnail);
-            $folder = date('Y-m-d');
-            $request->file('thumbnail')->store("images/{$folder}");
-        }
+        $data['thumbnail'] = Post::uploadImage($request, $post->thumbnail);
 
         $post->update($data);
         $post->tags()->sync($request->tags);
@@ -97,8 +91,10 @@ class PostController extends Controller
      */
     public function destroy(string $id)
     {
-        // $post = Post::find($id);
-        // $post->delete(); 
-        return redirect()->route('admin.posts.index')->with('success', 'Пост удален');
+        $post = Post::find($id);
+        $post->tags()->sync([]);
+        Storage::delete($post->thumbnail);
+        $post->delete(); 
+        return redirect()->route('admin.posts.index')->with('success', 'Статья удалена');
     }
 }

@@ -16,7 +16,7 @@ class PostController extends Controller
      */
     public function index()
     {   
-        $posts = Post::paginate(20);
+        $posts = Post::with('category', 'tags')->paginate(20); // WHERE cat, tag IN (1, 2, 3)
         return view('admin.posts.index', compact('posts'));
     }
 

@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\UserController;
+use App\Http\Middleware\AdminMiddleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,7 +24,7 @@ Route::get('/', function () {
 })->name('home');
 
 
-Route::prefix('admin')->name('admin.')->group(function() {
+Route::middleware('admin')->prefix('admin')->name('admin.')->group(function() {
     Route::get('/', [MainController::class, 'index'])->name('index');
     Route::resource('categories', CategoryController::class);
     Route::resource('tags', TagController::class);
@@ -31,9 +32,14 @@ Route::prefix('admin')->name('admin.')->group(function() {
 });
 
 
-Route::get('/register', [UserController::class, 'create'])->name('register.create');
-Route::post('/register', [UserController::class, 'store'])->name('register.store');
 
-Route::get('/login', [UserController::class, 'loginform'])->name('login.create');
-Route::post('/login', [UserController::class, 'login'])->name('login');
-Route::get('/logout', [UserController::class, 'logout'])->name('logout');
+Route::middleware('guest')->group(function() {
+    Route::get('/register', [UserController::class, 'create'])->name('register.create');
+    Route::post('/register', [UserController::class, 'store'])->name('register.store');
+    Route::get('/login', [UserController::class, 'loginform'])->name('login.create');
+    Route::post('/login', [UserController::class, 'login'])->name('login');
+});
+
+
+
+Route::get('/logout', [UserController::class, 'logout'])->name('logout')->middleware('auth');

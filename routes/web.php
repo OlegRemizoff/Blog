@@ -30,5 +30,10 @@ Route::prefix('admin')->name('admin.')->group(function() {
     Route::resource('posts', PostController::class);
 });
 
+
 Route::get('/register', [UserController::class, 'create'])->name('register.create');
 Route::post('/register', [UserController::class, 'store'])->name('register.store');
+
+Route::get('/login', [UserController::class, 'loginform'])->name('login.create');
+Route::post('/login', [UserController::class, 'login'])->name('login');
+Route::get('/logout', [UserController::class, 'logout'])->name('logout');

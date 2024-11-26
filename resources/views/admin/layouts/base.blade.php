@@ -15,6 +15,15 @@
   <link rel="stylesheet" href="{{ asset('assets/admin/css/adminlte.min.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/admin/plugins/select2/css/select2.min.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/admin/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
+  <!-- CKEditor -->
+  <style>
+    .ck-editor__editable_inline{
+      min-height: 300px;
+    }
+
+  </style>
+  
+
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -101,7 +110,6 @@
             <a href="#" class="dropdown-item">
               <!-- Message Start -->
               <div class="media">
-                <img src=".{{ asset('assets/admin/img/user3-128x128.jpg') }}" alt="User Avatar" class="img-size-50 img-circle mr-3">
                 <div class="media-body">
                   <h3 class="dropdown-item-title">
                     Nora Silvester
@@ -227,7 +235,7 @@
             <!-- Tags -->
             <li class="nav-item has-treeview">
               <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-tags"></i>
+                <i class="nav-icon fas fa-tags"></i>
                 <p>
                   Теги
                   <i class="right fas fa-angle-left"></i>
@@ -249,7 +257,7 @@
               </ul>
             </li>
             <!-- /.end tags -->
-             <!-- Posts -->
+            <!-- Posts -->
             <li class="nav-item has-treeview">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-edit"></i>
@@ -332,6 +340,75 @@
   <script src="{{ asset('assets/admin/js/adminlte.min.js') }}"></script>
   <!-- AdminLTE for demo purposes -->
   <script src="{{ asset('assets/admin/js/demo.js') }}"></script>
+  <!-- CKEditor 5 -->
+  <script src="{{ asset('assets/admin/ckeditor5/build/ckeditor.js') }}"></script>
+  <script src="{{ asset('assets/admin/ckfinder/ckfinder.js') }}"></script>
+
+<script>
+    ClassicEditor
+        .create( document.querySelector( '#content' ), {
+            ckfinder: {
+                uploadUrl: '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files&responseType=json'
+            },
+            image: {
+                // You need to configure the image toolbar, too, so it uses the new style buttons.
+                toolbar: [ 'imageTextAlternative', '|', 'imageStyle:alignLeft', 'imageStyle:full', 'imageStyle:alignRight' ],
+
+                styles: [
+                    // This option is equal to a situation where no style is applied.
+                    'full',
+
+                    // This represents an image aligned to the left.
+                    'alignLeft',
+
+                    // This represents an image aligned to the right.
+                    'alignRight'
+                ]
+            },
+            toolbar: {
+                items: [
+                    'heading',
+                    '|',
+                    'bold',
+                    'italic',
+                    'link',
+                    'bulletedList',
+                    'numberedList',
+                    '|',
+                    'indent',
+                    'outdent',
+                    'alignment',
+                    '|',
+                    'blockQuote',
+                    'insertTable',
+                    'undo',
+                    'redo',
+                    'CKFinder',
+                    'mediaEmbed'
+                ]
+            },
+            language: 'ru',
+            table: {
+                contentToolbar: [
+                    'tableColumn',
+                    'tableRow',
+                    'mergeTableCells'
+                ]
+            },
+        } )
+        .catch( function( error ) {
+            console.error( error );
+        } );
+
+    ClassicEditor
+        .create( document.querySelector( '#description' ), {
+            toolbar: [ 'heading', '|', 'bold', 'italic', '|', 'undo', 'redo' ]
+        } )
+        .catch( function( error ) {
+            console.error( error );
+        } );
+</script>
+
 
 
 

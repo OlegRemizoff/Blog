@@ -308,6 +308,11 @@
               {{ session('success') }}
             </div>
             @endif
+            @if (session()->has('error')) 
+            <div class="alert alert-danger">
+              {{ session('error') }}
+            </div>
+            @endif
           </div>
         </div>
       </div>
@@ -343,6 +348,8 @@
   <!-- CKEditor 5 -->
   <script src="{{ asset('assets/admin/ckeditor5/build/ckeditor.js') }}"></script>
   <script src="{{ asset('assets/admin/ckfinder/ckfinder.js') }}"></script>
+  <script src="{{ asset('assets/admin/plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
+
 
 <script>
     ClassicEditor
@@ -407,6 +414,11 @@
         .catch( function( error ) {
             console.error( error );
         } );
+
+
+    $(function () {
+      bsCustomFileInput.init();
+    });
 </script>
 
 

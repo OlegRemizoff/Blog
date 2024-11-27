@@ -68,7 +68,11 @@ class TagController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
-    {
+    {   
+        $tag = Tag::find($id);
+        if ($tag->posts->count()) {
+            return redirect()->route('admin.tags.index')->with('error', 'Ошибка! У тегов есть записи');
+        }
         Tag::destroy($id);
         return redirect()->route('admin.tags.index')->with('success', 'Тег удалён');
     }

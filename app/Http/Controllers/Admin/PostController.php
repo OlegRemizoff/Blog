@@ -43,7 +43,9 @@ class PostController extends Controller
             'thumbnail' => 'nullable|image',
         ]);
         
+        $user = $request->user();
         $data = $request->all();   
+        $data['user_id'] = $user->id;
         $data['thumbnail'] = Post::uploadImage($request);
 
         $post = Post::create($data);

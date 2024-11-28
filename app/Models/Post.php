@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Storage;
 
 use App\Models\Category;
 use App\Models\Tag;
+use App\Models\User;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
@@ -19,14 +20,17 @@ class Post extends Model
     use HasFactory;
     use HasSlug;
 
-    protected $fillable = ['title', 'description', 'content', 'category_id',  'tag_id', 'thumbnail'];
+    protected $fillable = ['title', 'description', 'content', 'category_id',  'tag_id', 'thumbnail', 'user_id'];
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    } 
 
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
     } 
-
-
 
     public function tags(): BelongsToMany
     {

@@ -1,12 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\AdminMiddleware;
 use App\Http\Controllers\Admin\MainController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\UserController;
-use App\Http\Middleware\AdminMiddleware;
+use App\Http\Controllers\Blog\BlogPostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,9 +20,8 @@ use App\Http\Middleware\AdminMiddleware;
 */
 // php artisan route:list --path=admin | просмотреть все маршруты
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
+Route::get('/', [BlogPostController::class, 'index'])->name('home');
+Route::get('/article/{id}', [BlogPostController::class, 'show'])->name('posts.single');
 
 
 Route::middleware('admin')->prefix('admin')->name('admin.')->group(function() {
@@ -41,5 +41,6 @@ Route::middleware('guest')->group(function() {
 });
 
 
-
 Route::get('/logout', [UserController::class, 'logout'])->name('logout')->middleware('auth');
+
+

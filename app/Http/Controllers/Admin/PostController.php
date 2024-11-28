@@ -45,10 +45,9 @@ class PostController extends Controller
         
         $user = $request->user();
         $data = $request->all();   
-        $data['user_id'] = $user->id;
         $data['thumbnail'] = Post::uploadImage($request);
 
-        $post = Post::create($data);
+        $post = $user->posts()->create($data);
         $post->tags()->sync($request->tags); // добавляем теги пришедшие из формы
 
         return redirect()->route('admin.posts.index')->with('success', 'Статья добавлена');

@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
+use Carbon\Carbon;
+
 use App\Models\Category;
 use App\Models\Tag;
 use App\Models\User;
@@ -59,5 +61,9 @@ class Post extends Model
         return $this->thumbnail ? asset( 'uploads/' . $this->thumbnail) : asset('no-image.jpg');
     }
 
+    public function getPostDate () {
+        return Carbon::createFromFormat('Y-m-d H:i:s', $this->created_at)->format('d F Y');
+        // return Carbon::parse($this->created_at)->diffForHumans();
+    }
     
 }

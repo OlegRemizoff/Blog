@@ -21,7 +21,7 @@ use App\Http\Controllers\Blog\BlogPostController;
 // php artisan route:list --path=admin | просмотреть все маршруты
 
 Route::get('/', [BlogPostController::class, 'index'])->name('home');
-Route::get('/article/{id}', [BlogPostController::class, 'show'])->name('posts.single');
+Route::get('/article/{slug}', [BlogPostController::class, 'show'])->name('posts.single');
 
 
 Route::middleware('admin')->prefix('admin')->name('admin.')->group(function() {

@@ -18,13 +18,10 @@ class BlogPostController extends Controller
 
     public function show($slug) 
     {
-        $posts = Post::all();
-        $post = Post::findBySlug($posts, $slug);
-        dd($post);
-        // dd($post);
-        // $post = Post::find('1');
-        // dd($post->slug);
-        // return view('blog.posts.single');
+        $post = Post::where('slug', $slug)->firstOrFail();
+        $post->views += 1;
+        $post->update();
+        return view('blog.posts.single', compact('post'));
     }
 
 }

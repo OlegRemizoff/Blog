@@ -1,5 +1,5 @@
 @extends('blog.layouts.base')
-@section('title')@parent Article @endsection
+@section('title')@parent {{ $post->title }} @endsection
 
 @section('content')
 <div class="wrappage">
@@ -12,20 +12,18 @@
         <div class="container">
             <div class="row">
                 <div class="post-image col-xs-12 col-sm-12 col-md-12">
-                    <img src="{{ asset('assets/blog/img/blog/1.jpg') }}" alt="" class="img-reponsive">
-                </div>
-
+                    <img src="{{ $post->getImage() }}" alt=""class="img-reponsive">
+                </div><!-- 1440-587 -->
                 <div class="main-content col-xs-12 col-md-8">
                     <div class="blog-post-container blog-page">
                         <div class="blog-post-single blog-post-item">
                             <div class="blog-post-info">
-                                <div class="post-date">February 22, 2017</div>
-                                <h3 class="post-name ver2"><a href="#">The Must Have Neutral Layers for Spring</a></h3>
+                                <div class="post-date">{{ $post->getPostDate() }}</div>
+                                <h3 class="post-name ver2"><a href="#">{{ $post->title }}</a></h3>
                             </div>
                             <div class="post-metas ver2">
                                 <div class="categories">
-                                    <a href="#" rel="category tag">BEAUTY</a>,
-                                    <a href="#" rel="category tag">FASHION</a>
+                                    <a href="#" rel="category tag">{{ $post->category->title }}</a>
                                 </div>
                             </div>
                             <div class="post-content">
@@ -38,6 +36,17 @@
                                     </div>
                                 </div>
                                 <div class="post-text">
+                                    <p>{!! $post->content !!}</p>
+                                    <blockquote>
+                                        <p>There is only one happiness in this life, to love
+                                            <br> and be loved.
+                                        </p>
+                                        <p class="author">George Sand</p>
+                                    </blockquote>
+                                    <p>Professionally initiate alternative metrics before high standards in synergy. Quickly enable orthogonal technology for enabled sources. Dramatically evisculate functional web services via emerging human capital. Synergistically promote high-payoff niches and client-based niches. Appropriately mesh technically sound processes vis-a-vis exceptional meta-services.</p>
+                                    <p>Intrinsicly re-engineer standards compliant potentialities with business process improvements. Authoritatively reinvent cross-unit catalysts for change before high-quality outsourcing. Uniquely predominate technically sound web-readiness rather than cost effective solutions. Phosfluorescently synergize.</p>
+                                </div>
+                                <!-- <div class="post-text">
                                     <p>Completely network high standards in innovation whereas goal-oriented paradigms. Intrinsicly morph human capital via enabled convergence. Objectively pursue leading-edge web-readiness before market-driven paradigms. Competently disseminate go forward "outside the box" thinking before proactive expertise. Quickly incubate effective schemas through future-proof users.</p>
                                     <p>Professionally initiate alternative metrics before high standards in synergy. Quickly enable orthogonal technology for enabled sources. Dramatically evisculate functional web services via emerging human capital. Synergistically promote high-payoff niches and client-based niches. Appropriately mesh technically sound processes vis-a-vis exceptional meta-services.</p>
                                     <p>Intrinsicly re-engineer standards compliant potentialities with business process improvements. Authoritatively reinvent cross-unit catalysts for change before high-quality outsourcing. Uniquely predominate technically sound web-readiness rather than cost effective solutions. Phosfluorescently synergize.</p>
@@ -49,7 +58,7 @@
                                     </blockquote>
                                     <p>Professionally initiate alternative metrics before high standards in synergy. Quickly enable orthogonal technology for enabled sources. Dramatically evisculate functional web services via emerging human capital. Synergistically promote high-payoff niches and client-based niches. Appropriately mesh technically sound processes vis-a-vis exceptional meta-services.</p>
                                     <p>Intrinsicly re-engineer standards compliant potentialities with business process improvements. Authoritatively reinvent cross-unit catalysts for change before high-quality outsourcing. Uniquely predominate technically sound web-readiness rather than cost effective solutions. Phosfluorescently synergize.</p>
-                                </div>
+                                </div> -->
                                 <div class="post-share">
                                     <ul class="social-share">
                                         <li><a href="#"><i class="fa fa-pinterest-p"></i>PIN THE POST</a></li>

@@ -7,7 +7,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\Blog\BlogPostController;
+use App\Http\Controllers\Blog\BlogController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,8 +20,8 @@ use App\Http\Controllers\Blog\BlogPostController;
 */
 // php artisan route:list --path=admin | просмотреть все маршруты
 
-Route::get('/', [BlogPostController::class, 'index'])->name('home');
-Route::get('/article/{slug}', [BlogPostController::class, 'show'])->name('posts.single');
+Route::get('/', [BlogController::class, 'index'])->name('home');
+Route::get('/article/{slug}', [BlogController::class, 'show'])->name('posts.single');
 
 
 Route::middleware('admin')->prefix('admin')->name('admin.')->group(function() {

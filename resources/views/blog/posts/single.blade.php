@@ -12,29 +12,30 @@
         <div class="container">
             <div class="row">
                 <div class="post-image col-xs-12 col-sm-12 col-md-12">
-                    <img src="{{ $post->getImage() }}" alt=""class="img-reponsive">
+                    <img src="{{ $post->getImage() }}" alt="" class="img-reponsive">
                 </div><!-- 1440-587 -->
                 <div class="main-content col-xs-12 col-md-8">
                     <div class="blog-post-container blog-page">
                         <div class="blog-post-single blog-post-item">
                             <div class="blog-post-info">
-                                <div class="post-date">{{ $post->getPostDate() }}</div>
+                                <div class="post-date">{{ $post->getPostDate() }} / &#x1F441;{{ $post->views }}</div>
                                 <h3 class="post-name ver2"><a href="#">{{ $post->title }}</a></h3>
                             </div>
                             <div class="post-metas ver2">
                                 <div class="categories">
-                                    <a href="#" rel="category tag">{{ $post->category->title }}</a>
+                                    <a href="#" rel="category tag">Категория / <strong>{{ $post->category->title }}</strong></a>
                                 </div>
                             </div>
                             <div class="post-content">
-                                <div class="row">
+                                <!-- images -->
+                                <!-- <div class="row">
                                     <div class="col-xs-6 col-sm-6 col-md-6">
-                                        <a class="hover-images" href="#"><img src="{{ asset('assets/blog/img/blog/1_sm.jpg') }}" alt="blog-img" class="img-reponsive"></a>
+                                        <a  class="hover-images" href="#"><img src="{{ asset('assets/blog/img/blog/1_sm.jpg') }}" alt="blog-img" class="img-reponsive"></a>
                                     </div>
                                     <div class="col-xs-6 col-sm-6 col-md-6">
                                         <a class="hover-images" href="#"><img src="{{ asset('assets/blog/img/blog/2_sm.jpg') }}" alt="blog-img" class="img-reponsive"></a>
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="post-text">
                                     <p>{!! $post->content !!}</p>
                                     <blockquote>
@@ -59,20 +60,20 @@
                                     <p>Professionally initiate alternative metrics before high standards in synergy. Quickly enable orthogonal technology for enabled sources. Dramatically evisculate functional web services via emerging human capital. Synergistically promote high-payoff niches and client-based niches. Appropriately mesh technically sound processes vis-a-vis exceptional meta-services.</p>
                                     <p>Intrinsicly re-engineer standards compliant potentialities with business process improvements. Authoritatively reinvent cross-unit catalysts for change before high-quality outsourcing. Uniquely predominate technically sound web-readiness rather than cost effective solutions. Phosfluorescently synergize.</p>
                                 </div> -->
-                                <div class="post-share">
+                                <!-- <div class="post-share">
                                     <ul class="social-share">
                                         <li><a href="#"><i class="fa fa-pinterest-p"></i>PIN THE POST</a></li>
                                         <li><a href="#"><i class="fa fa-twitter"></i>Tweet the Post</a></li>
                                         <li><a href="#"><i class="fa fa-facebook"></i>Share the post</a></li>
                                     </ul>
-                                </div>
-                                <div class="post-link">
+                                </div> -->
+                                <!-- <div class="post-link">
                                     <div class="nav-links">
                                         <div class="nav-previous"><a href="">Previous Post</a></div>
                                         <div class="nav-next"><a href="">NExt POST</a></div>
                                     </div>
-                                </div>
-                                <div class="post-related">
+                                </div> -->
+                                <!-- <div class="post-related">
                                     <h3 class="post-title widget-title">You Might Also Like</h3>
                                     <div class="post-related-slide">
                                         <div class="row">
@@ -100,8 +101,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="post-comments">
+                                </div> -->
+                                <!-- <div class="post-comments">
                                     <h3 class="post-comments-title widget-title">Comments (4)</h3>
                                     <ul class="commentlist">
                                         <li>
@@ -191,7 +192,7 @@
                                             </div>
                                         </li>
                                     </ul>
-                                </div>
+                                </div> -->
                                 <div class="post-reply">
                                     <h3 class="post-title widget-title">Leave A Reply</h3>
                                     <form action="#" class="comment-form">
@@ -215,7 +216,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <button type="submit" class="btn btn-submit">Submit</button>
+                                        <button type="submit" class="btn btn-submit" disabled="disabled">Submit</button>
                                     </form>
                                 </div>
                             </div>
@@ -223,7 +224,7 @@
                     </div>
                 </div>
                 <!-- Sidebar -->
-                @include('blog.layouts.sidebar')
+                @include('blog.layouts.sidebar-single')
                 <!-- ./sidebar -->
             </div>
         </div>

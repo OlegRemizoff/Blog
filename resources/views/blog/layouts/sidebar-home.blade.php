@@ -27,23 +27,34 @@
     <aside class="widget widget_category">
         <h3 class="widget-title">Categories</h3>
         <ul>
-            <li><a href="#">fashion</a>3</li>
-            <li><a href="#">family</a>6</li>
-            <li><a href="#">beauty</a>9</li>
-            <li><a href="#">essential six</a>12</li>
-            <li><a href="#">videos</a>16</li>
+        @foreach ($cats as $cat)
+            <li><a href="#">{{ $cat->title }}</a>{{ $cat->posts_count }}</li>
+        @endforeach
         </ul>
     </aside>
     <aside class="widget widget_popular_posts">
         <h3 class="widget-title">Popular Posts</h3>
         <div class="post-item-list">
+            @if ($popular_posts->count())
+                @foreach ($popular_posts as $pp)
+                <div class="post-item">
+                    <div class="post-item-img">
+                        <a href="#"><img src="{{ $pp->getImage() }}" width="98" alt="blog-img" class="img-reponsive"></a>
+                    </div>
+                    <div class="post-item-text">
+                        <div class="post-date">{{ $pp->getPostDate() }}</div>
+                        <h3><a href="#">{{ $pp->title }}</a></h3>
+                    </div>
+                </div>
+                @endforeach
+            @else
             <div class="post-item">
                 <div class="post-item-img">
-                    <a href="#"><img src="{{ asset('assets/blog/img/blog/popular_1.jpg') }}" alt="blog-img" class="img-reponsive"></a>
+                    <a href="#"><img src="{{ asset('assets/blog/img/blog/popular_2.jpg') }}" alt="blog-img" class="img-reponsive"></a>
                 </div>
                 <div class="post-item-text">
                     <div class="post-date">February 22, 2017</div>
-                    <h3><a href="#">The Must Have Neutral Layers for Spring</a></h3>
+                    <h3><a href="#">A planner tool to help coordinate</a></h3>
                 </div>
             </div>
             <div class="post-item">
@@ -57,16 +68,18 @@
             </div>
             <div class="post-item">
                 <div class="post-item-img">
-                    <a href="#"><img src="{{ asset('assets/blog/img/blog/popular_3.jpg') }}" alt="blog-img" class="img-reponsive"></a>
+                    <a href="#"><img src="{{ asset('assets/blog/img/blog/popular_2.jpg') }}" alt="blog-img" class="img-reponsive"></a>
                 </div>
                 <div class="post-item-text">
                     <div class="post-date">February 22, 2017</div>
-                    <h3><a href="#">How to Shop with Us</a></h3>
+                    <h3><a href="#">A planner tool to help coordinate</a></h3>
                 </div>
             </div>
+            @endif
+
         </div>
     </aside>
-    <aside class="widget widget_newletters">
+    <!-- <aside class="widget widget_newletters">
         <h3 class="widget-title">Newletters</h3>
         <div class="newletter-form">
             <form action="#">
@@ -74,8 +87,8 @@
                 <button type="submit" class="btn btn-submit">Submit</button>
             </form>
         </div>
-    </aside>
-    <aside class="widget widget_instagram">
+    </aside> -->
+    <!-- <aside class="widget widget_instagram">
         <h3 class="widget-title">Instagrams</h3>
         <div class="cosre-instagram">
             <div class="item">
@@ -97,15 +110,17 @@
                 <a class="hover-images" href="#"><img src="{{ asset('assets/blog/img/blog/insta_6.jpg') }}" alt="" class="img-reponsive"></a>
             </div>
         </div>
-    </aside>
-    <aside class="widget widget_tags">
-        <h3 class="widget-title">Tags</h3>
-        <div class="content">
-            <a href="#" title="design" class="active">Design</a>
-            <a href="#" title="news">news</a>
-            <a href="#" title="lifestyle">life style</a>
-            <a href="#" title="fashion">Fashion</a>
-            <a href="#" title="blog">blog</a>
-        </div>
-    </aside>
+    </aside> -->
+
+    @if ($tags->count())
+            <aside class="widget widget_tags">
+                <h3 class="widget-title">Recent tags</h3>
+                <div class="content">
+                @foreach ($tags as $tag)
+                    <a href="#" title="news">{{ $tag->title }}</a>
+                    <!-- <a href="#" title="design" class="active">Design</a> -->
+                @endforeach
+                </div>
+            </aside>
+    @endif
 </div>

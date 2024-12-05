@@ -20,13 +20,15 @@
                                 <a class="hover-images" href="#"><img src="{{ $post->getImage() }}" class="img-reponsive" alt="blog-img"></a>
                             </div>
                             <div class="blog-post-info">
-                                <div class="post-date">{{ $post->getPostDate() }}</div>
+                                <div class="post-date">
+                                    {{ $post->getPostDate() }} / &#x1F441;{{ $post->views }}
+                                </div>
                                 <!-- <div class="post-date">February 22, 2017</div> -->
-                                <h3 class="post-name"><a href="#">{{ $post->title }}</a></h3>
+                                <h3 class="post-name"><a href="{{ route('posts.single', [$post->slug]) }}">{{ $post->title }}</a></h3>
                                 <p class="post-desc">
                                     {{ strip_tags($post->description) }}
                                 </p>
-                                <a href="{{ $post->slug }}" class="readmore">Read more</a>
+                                <a href="{{ route('posts.single', [$post->slug]) }}" class="readmore">Read more</a>
                             </div>
                             <div class="post-metas">
                                 <div class="categories">
@@ -94,7 +96,7 @@
 
                     <div class="pagination-container pagination-blog">
                         <nav>
-                        {{ $posts->links('vendor.pagination.template') }}
+                        {{ $posts->links('vendor.pagination.template', ['foo' => 'bar']) }}
                         </nav>
                     </div>
 
@@ -114,7 +116,7 @@
                     </div> -->
                 </div>
                 <!-- Sidebar -->
-                @include('blog.layouts.sidebar')
+                @include('blog.layouts.sidebar-home')
                 <!-- ./sidebar -->
             </div>
         </div>

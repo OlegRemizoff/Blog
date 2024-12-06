@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\Tag;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\ServiceProvider;
 
@@ -40,7 +41,12 @@ class AppServiceProvider extends ServiceProvider
             );
         });
 
+        view()->composer(['blog.layouts.sidebar-home'], function($view) {
+            $recent_tags = Tag::orderBy('created_at', 'desc')->limit(12)->get();
+            $view->with('recent_tags', $recent_tags);
+        });
     }
+    
 }
 
 // Пример подсчета категорий

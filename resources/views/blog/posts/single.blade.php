@@ -23,7 +23,7 @@
                             </div>
                             <div class="post-metas ver2">
                                 <div class="categories">
-                                    <a href="#" rel="category tag">Категория / <strong>{{ $post->category->title }}</strong></a>
+                                    <a href="#" rel="category tag">Категория -> <strong>{{ $post->category->title }}</strong></a>
                                 </div>
                             </div>
                             <div class="post-content">

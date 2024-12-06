@@ -1,12 +1,18 @@
 <div class="sidebar col-xs-12 col-md-4">
-    <!-- <aside class="widget widget_search">
+    <style>
+        .widget_search {
+            visibility: hidden; /* Скрывает содержимое виджета */
+            margin-top: 7.6px;
+        }
+    </style>
+    <aside class="widget widget_search">
         <form action="#" method="get" class="search-form">
             <input type="text" name="s" placeholder="Search...">
             <button type="submit" class="btn btn-search">
                 <i class="icon-magnifier"></i>
             </button>
         </form>
-    </aside> -->
+    </aside>
     <aside class="widget widget_social">
         <h3 class="widget-title">Social</h3>
         <div class="social">
@@ -28,7 +34,7 @@
         <h3 class="widget-title">Categories</h3>
         <ul>
         @foreach ($cats as $cat)
-            <li><a href="#" >{{ $cat->title }}</a>{{ $cat->posts_count }}</li>
+            <li><a href="{{ route('posts.by.category', [$cat->slug]) }}" >{{ $cat->title }}</a>{{ $cat->posts_count }}</li>
         @endforeach
         </ul>
     </aside>
@@ -111,13 +117,22 @@
             </div>
         </div>
     </aside> -->
-    @if ($post->tags->count())
+    @if ($post->tags->count() > 0)
         <aside class="widget widget_tags">
             <h3 class="widget-title">Tags</h3>
             <div class="content">
             @foreach ($post->tags as $tag)
-                <a href="#" title="news">{{ $tag->title }}</a>
+                <a href="{{ route('posts.by.tag', [$tag->slug]) }}" title="news">{{ $tag->title }}</a>
             @endforeach
+            </div>
+        </aside>
+    @else
+        <aside class="widget widget_tags">
+            <h3 class="widget-title">Tags</h3>
+            <div class="content">
+                <a href="#" title="design" class="active">Design</a>
+                <a href="#" title="design" class="active">Fashion</a>
+                <a href="#" title="design" class="active">Nature</a>
             </div>
         </aside>
     @endif

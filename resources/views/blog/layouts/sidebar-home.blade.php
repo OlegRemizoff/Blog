@@ -1,12 +1,15 @@
 <div class="sidebar col-xs-12 col-md-4">
-    <aside class="widget widget_search">
-        <form action="#" method="get" class="search-form">
-            <input type="text" name="s" placeholder="Search...">
-            <button type="submit" class="btn btn-search">
-                <i class="icon-magnifier"></i>
-            </button>
-        </form>
-    </aside>
+    @if (request()->is('/'))
+        <aside class="widget widget_search">
+            <form action="#" method="get" class="search-form">
+                <input type="text" name="s" placeholder="Search...">
+                <button type="submit" class="btn btn-search">
+                    <i class="icon-magnifier"></i>
+                </button>
+            </form>
+        </aside>
+    @endif
+
     <aside class="widget widget_social">
         <h3 class="widget-title">Social</h3>
         <div class="social">
@@ -28,7 +31,7 @@
         <h3 class="widget-title">Categories</h3>
         <ul>
         @foreach ($cats as $cat)
-            <li><a href="#">{{ $cat->title }}</a>{{ $cat->posts_count }}</li>
+            <li><a href="{{ route('posts.by.category', [$cat->slug]) }}">{{ $cat->title }}</a>{{ $cat->posts_count }}</li>
         @endforeach
         </ul>
     </aside>
@@ -112,15 +115,24 @@
         </div>
     </aside> -->
 
-    @if ($tags->count())
+    @if (($recent_tags ?? collect())->count() > 0)
             <aside class="widget widget_tags">
                 <h3 class="widget-title">Recent tags</h3>
                 <div class="content">
-                @foreach ($tags as $tag)
-                    <a href="#" title="news">{{ $tag->title }}</a>
+                @foreach ($recent_tags as $tag)
+                    <a href="{{ route('posts.by.tag', [$tag->slug]) }}" title="news">{{ $tag->title }}</a>
                     <!-- <a href="#" title="design" class="active">Design</a> -->
                 @endforeach
                 </div>
             </aside>
+    {{--@else--}}
+        <!-- <aside class="widget widget_tags">
+            <h3 class="widget-title">Recent tags</h3>
+            <div class="content">
+                <a href="#" title="design" class="active">Design</a>
+                <a href="#" title="design" class="active">Fashion</a>
+                <a href="#" title="design" class="active">Nature</a>
+            </div>
+        </aside> -->
     @endif
 </div>

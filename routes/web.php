@@ -1,13 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Middleware\AdminMiddleware;
 use App\Http\Controllers\Admin\MainController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Blog\BlogController;
+use App\Http\Controllers\Blog\TagBlogController;
+use App\Http\Controllers\Blog\CategoryBlogController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +23,9 @@ use App\Http\Controllers\Blog\BlogController;
 
 Route::get('/', [BlogController::class, 'index'])->name('home');
 Route::get('/article/{slug}', [BlogController::class, 'show'])->name('posts.single');
+Route::get('/category/{slug}', [CategoryBlogController::class, 'index'])->name('posts.by.category');
+Route::get('/tag/{slug}', [TagBlogController::class, 'index'])->name('posts.by.tag');
+
 
 
 Route::middleware('admin')->prefix('admin')->name('admin.')->group(function() {

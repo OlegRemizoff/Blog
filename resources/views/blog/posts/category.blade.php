@@ -1,6 +1,6 @@
 @extends('blog.layouts.base')
 
-@section('title')@parent Home @endsection
+@section('title')@parent {{ $posts->firstOrFail()->category->title }} @endsection
 
 @section('content')
 <div class="wrappage">
@@ -32,7 +32,7 @@
                             </div>
                             <div class="post-metas">
                                 <div class="categories">
-                                    <a href="{{ route('posts.by.category', [$post->category->slug]) }}" rel="category tag">Категория -> {{ $post->category->title }}</a>
+                                    <a href="#" rel="category tag">Категория -> <strong></strong>{{ $post->category->title }}</a>
                                 </div>
                                 <span class="post-comments-number">3</span>
                             </div>
@@ -96,7 +96,7 @@
 
                     <div class="pagination-container pagination-blog">
                         <nav>
-                        {{ $posts->links('vendor.pagination.template', ['foo' => 'bar']) }}
+                       {{-- {{ $posts->links('vendor.pagination.template', ['foo' => 'bar']) }} --}}
                         </nav>
                     </div>
 

@@ -11,8 +11,7 @@ class BlogController extends Controller
     public function index()
     {   
         $posts = Post::with('category')->paginate(5);
-        $tags = Tag::orderBy('created_at', 'desc')->limit(12)->get();
-        return view('blog.posts.index', compact('posts', 'tags'));
+        return view('blog.posts.index', compact('posts'));
     }
 
     public function show($slug) 

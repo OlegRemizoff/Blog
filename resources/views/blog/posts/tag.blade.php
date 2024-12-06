@@ -1,6 +1,6 @@
 @extends('blog.layouts.base')
 
-@section('title')@parent Home @endsection
+@section('title')@parent Статьи по тегам @endsection
 
 @section('content')
 <div class="wrappage">
@@ -96,7 +96,7 @@
 
                     <div class="pagination-container pagination-blog">
                         <nav>
-                        {{ $posts->links('vendor.pagination.template', ['foo' => 'bar']) }}
+                        {{--{{ $posts->links('vendor.pagination.template', ['foo' => 'bar']) }}--}}
                         </nav>
                     </div>
 

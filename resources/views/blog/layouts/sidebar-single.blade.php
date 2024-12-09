@@ -41,7 +41,7 @@
     <aside class="widget widget_popular_posts">
         <h3 class="widget-title">Popular Posts</h3>
         <div class="post-item-list">
-            @if ($popular_posts->count())
+            @if ($popular_posts->count() > 0)
                 @foreach ($popular_posts as $pp)
                 <div class="post-item">
                     <div class="post-item-img">

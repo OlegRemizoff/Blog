@@ -1,11 +1,17 @@
 <div class="sidebar col-xs-12 col-md-4">
     @if (request()->is('/'))
-        <aside class="widget widget_search">
-            <form action="#" method="get" class="search-form">
-                <input type="text" name="s" placeholder="Search...">
+        <aside class="widget widget_search ">
+            <form action="{{ route('search') }}" method="get" class="search-form">
+            <input  type="text" name="s" required class="@error('s') is-invalid @enderror" placeholder="Search..." >
+                <!-- <input  type="text" name="s" required oninvalid="this.setCustomValidity('Пожалуйста, введите текст для поиска.')" oninput="this.setCustomValidity('')" placeholder="Search..." > -->
                 <button type="submit" class="btn btn-search">
                     <i class="icon-magnifier"></i>
                 </button>
+                @error('s')
+                    <div class="invalid-feedback" style="color: red;">
+                {{ $message }}
+            </div>
+            @enderror
             </form>
         </aside>
     @endif

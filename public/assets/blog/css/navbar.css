@@ -1,0 +1,34 @@
+.head-image {
+    position: relative;
+    height: 60vh;
+    min-height: 300px;
+    background-color: #f8f9fa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+.head-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.head-image .content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: white;
+}
+.head-image:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}

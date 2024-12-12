@@ -13,6 +13,7 @@ use App\Http\Controllers\Blog\SearchController;
 use App\Http\Controllers\Blog\BlogController;
 use App\Http\Controllers\Blog\TagBlogController;
 use App\Http\Controllers\Blog\CategoryBlogController;
+use App\Http\Controllers\Blog\CommentController;
 
 
 /*
@@ -31,6 +32,7 @@ Route::get('/article/{slug}', [BlogController::class, 'show'])->name('posts.sing
 Route::get('/category/{slug}', [CategoryBlogController::class, 'index'])->name('posts.by.category');
 Route::get('/tag/{slug}', [TagBlogController::class, 'index'])->name('posts.by.tag');
 Route::get('/search', [SearchController::class, 'index'])->name('search');
+Route::post('/comment', [CommentController::class, 'store'])->name('comment');
 
 
 

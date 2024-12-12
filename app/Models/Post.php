@@ -14,6 +14,7 @@ use Carbon\Carbon;
 use App\Models\Category;
 use App\Models\Tag;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
@@ -37,6 +38,11 @@ class Post extends Model
     public function tags(): BelongsToMany
     {
         return $this->belongsToMany(Tag::class);
+    }
+
+    public function comments(): HasMany
+    {
+        return $this->hasMany(Comment::class);
     }
 
     public function getSlugOptions() : SlugOptions

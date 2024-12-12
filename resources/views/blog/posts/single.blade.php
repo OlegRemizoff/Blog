@@ -10,6 +10,30 @@
     <!--end hero-section-->
     <div class="main-container right-slidebar single-post v2">
         <div class="container">
+            <!-- Messages and Errors -->
+        <div class="row">
+          <div class="col-12">
+            @if ($errors->any())
+            <div class="alert alert-danger">
+              <ul class="list-unstyled">
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+              </ul>
+            </div>
+            @endif
+            @if (session()->has('success')) <!-- ключ success указали в store -->
+            <div class="alert alert-success">
+              {{ session('success') }}
+            </div>
+            @endif
+            @if (session()->has('error')) 
+            <div class="alert alert-danger">
+              {{ session('error') }}
+            </div>
+            @endif
+          </div>
+        </div>
             <div class="row">
                 <div class="post-image col-xs-12 col-sm-12 col-md-12">
                     <img src="{{ $post->getImage() }}" alt="" class="img-reponsive">
@@ -102,9 +126,11 @@
                                         </div>
                                     </div>
                                 </div> -->
-                                <!-- <div class="post-comments">
-                                    <h3 class="post-comments-title widget-title">Comments (4)</h3>
+                                @if ($post->comments()->count())
+                                <div class="post-comments">
+                                    <h3 class="post-comments-title widget-title">Comments ({{ $post->comments()->count() }})</h3>
                                     <ul class="commentlist">
+                                    @foreach($post->comments as $comment)
                                         <li>
                                             <div class="comment">
                                                 <div class="avatar">
@@ -113,19 +139,19 @@
                                                 <div class="comment-box">
                                                     <div class="first-box">
                                                         <div class="comment-author-meta">
-                                                            <strong>Darnell Patterson</strong>
-                                                            <div class="date">December 29, 2016</div>
+                                                            <strong>{{ $comment->user->name }}</strong>
+                                                            <div class="date">{{ $comment->getCommentDate() }}</div>
                                                         </div>
                                                         <div class="comment-post-reply">
                                                             <a href="#" class="comment-reply">Reply</a>
                                                         </div>
                                                     </div>
                                                     <div class="comment-content">
-                                                        Competently leverage other's resource maximizing e-commerce and customer directed benefits. Progressively communicate progressive communities without value-added expertise. Distinctively pursue enterprise action.
+                                                        {{ $comment->content }}
                                                     </div>
                                                 </div>
                                             </div>
-                                            <ul class="comment-child">
+                                            <!-- <ul class="comment-child">
                                                 <li>
                                                     <div class="comment">
                                                         <div class="avatar">
@@ -147,9 +173,10 @@
                                                         </div>
                                                     </div>
                                                 </li>
-                                            </ul>
+                                            </ul> -->
                                         </li>
-                                        <li>
+                                        @endforeach
+                                        <!-- <li>
                                             <div class="comment">
                                                 <div class="avatar">
                                                     <a href="#"><img src="{{ asset('assets/blog/img/blog/about5.jpg') }}" alt="images" class="img-responsive"></a>
@@ -169,34 +196,19 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </li>
-                                        <li>
-                                            <div class="comment">
-                                                <div class="avatar">
-                                                    <a href="#"><img src="{{ asset('assets/blog/img/blog/about5.jpg') }}" alt="images" class="img-responsive"></a>
-                                                </div>
-                                                <div class="comment-box">
-                                                    <div class="first-box">
-                                                        <div class="comment-author-meta">
-                                                            <strong>Darnell Patterson</strong>
-                                                            <div class="date">December 29, 2016</div>
-                                                        </div>
-                                                        <div class="comment-post-reply">
-                                                            <a href="#" class="comment-reply">Reply</a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="comment-content">
-                                                        Competently leverage other's resource maximizing e-commerce and customer directed benefits. Progressively communicate progressive communities without value-added expertise. Distinctively pursue enterprise action.
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
+                                        </li> -->
                                     </ul>
-                                </div> -->
+                                </div>
+                                @else 
+                                    <p>nothing</p>
+                                @endif
+
+                                <!-- Leave comment -->
                                 <div class="post-reply">
-                                    <h3 class="post-title widget-title">Leave A Reply</h3>
-                                    <form action="#" class="comment-form">
-                                        <div class="form-group">
+                                    <!-- <h3 class="post-title widget-title">Leave A Reply</h3> -->
+                                    <form method="post" action="{{ route('comment') }}" class="comment-form">
+                                        @csrf
+                                        <!-- <div class="form-group">
                                             <div class="row">
                                                 <div class="col-md-6 col-xs-12">
                                                     <label>First Name *</label>
@@ -207,16 +219,24 @@
                                                     <input type="text" name="last_name" class="form-control" value="">
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> -->
+                                        <input type="hidden" name="user_id" value="{{ auth()->id() }}"> 
+                                        <input type="hidden" name="post_id" value="{{ $post->id }}">
                                         <div class="form-group">
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <label>Your Comments</label>
-                                                    <textarea name="note" id="message" tabindex="2" class="form-control"></textarea>
+                                                    <label>Leave a comment</label>
+                                                    <textarea name="note" id="message" tabindex="2" required class="form-control"></textarea>
                                                 </div>
                                             </div>
                                         </div>
-                                        <button type="submit" class="btn btn-submit" disabled="disabled">Submit</button>
+                                        @if (auth()->check())
+                                        <button type="submit" class="btn btn-submit">Submit</button>
+                                        @else 
+                                        <h3 class="post-title widget-title"></h3>
+
+                                        <button type="submit" class="btn btn-submit" disabled title="Только для зарегистрированных пользователей">Submit</button>
+                                        @endif
                                     </form>
                                 </div>
                             </div>

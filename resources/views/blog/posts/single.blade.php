@@ -11,29 +11,29 @@
     <div class="main-container right-slidebar single-post v2">
         <div class="container">
             <!-- Messages and Errors -->
-        <div class="row">
-          <div class="col-12">
-            @if ($errors->any())
-            <div class="alert alert-danger">
-              <ul class="list-unstyled">
-                @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-                @endforeach
-              </ul>
+            <div class="row">
+                <div class="col-12">
+                    @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul class="list-unstyled">
+                            @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
+                    @if (session()->has('success')) <!-- ключ success указали в store -->
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                    @endif
+                    @if (session()->has('error'))
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                    @endif
+                </div>
             </div>
-            @endif
-            @if (session()->has('success')) <!-- ключ success указали в store -->
-            <div class="alert alert-success">
-              {{ session('success') }}
-            </div>
-            @endif
-            @if (session()->has('error')) 
-            <div class="alert alert-danger">
-              {{ session('error') }}
-            </div>
-            @endif
-          </div>
-        </div>
             <div class="row">
                 <div class="post-image col-xs-12 col-sm-12 col-md-12">
                     <img src="{{ $post->getImage() }}" alt="" class="img-reponsive">
@@ -130,7 +130,7 @@
                                 <div class="post-comments">
                                     <h3 class="post-comments-title widget-title">Comments ({{ $post->comments()->count() }})</h3>
                                     <ul class="commentlist">
-                                    @foreach($post->comments as $comment)
+                                        @foreach($post->comments as $comment)
                                         <li>
                                             <div class="comment">
                                                 <div class="avatar">
@@ -142,6 +142,12 @@
                                                             <strong>{{ $comment->user->name }}</strong>
                                                             <div class="date">{{ $comment->getCommentDate() }}</div>
                                                         </div>
+                                                        @if (isset(auth()->user()->id) && auth()->user()->id == $comment->user_id)
+                                                        <div class="comment-post-reply">
+                                                            <p id="comment-content-{{ $comment->id }}"></p>
+                                                            <a href="#" class="comment-reply" onclick="openEditForm({{ $comment->id }}); return false;"><i class="fas fa-cog"></i></a>
+                                                        </div>
+                                                        @endif
                                                         <div class="comment-post-reply">
                                                             <a href="#" class="comment-reply">Reply</a>
                                                         </div>
@@ -175,6 +181,15 @@
                                                 </li>
                                             </ul> -->
                                         </li>
+                                        <div class="post-reply">
+                                            <form id="edit-form-{{ $comment->id }}" method="post" action="{{ route('comment.update', $comment->id) }}" style="display: none;">
+                                                @csrf
+                                                @method('PUT')
+                                                <textarea rows="5" name="content" class="form-control">{{ $comment->content }}</textarea>
+                                                <button type="submit" class="btn btn-submit">Save</button>
+                                                <button type="button" class="btn btn-cancel" onclick="closeEditForm({{ $comment->id }})">Cancel</button>
+                                            </form>
+                                        </div>
                                         @endforeach
                                         <!-- <li>
                                             <div class="comment">
@@ -199,8 +214,7 @@
                                         </li> -->
                                     </ul>
                                 </div>
-                                @else 
-                                    <p>nothing</p>
+                                @else
                                 @endif
 
                                 <!-- Leave comment -->
@@ -220,7 +234,7 @@
                                                 </div>
                                             </div>
                                         </div> -->
-                                        <input type="hidden" name="user_id" value="{{ auth()->id() }}"> 
+                                        <input type="hidden" name="user_id" value="{{ auth()->id() }}">
                                         <input type="hidden" name="post_id" value="{{ $post->id }}">
                                         <div class="form-group">
                                             <div class="row">
@@ -232,7 +246,7 @@
                                         </div>
                                         @if (auth()->check())
                                         <button type="submit" class="btn btn-submit">Submit</button>
-                                        @else 
+                                        @else
                                         <h3 class="post-title widget-title"></h3>
 
                                         <button type="submit" class="btn btn-submit" disabled title="Только для зарегистрированных пользователей">Submit</button>
@@ -253,4 +267,14 @@
         @include('blog.layouts.footer')
     </footer>
 </div>
+<script>
+    function openEditForm(commentId) {
+        document.getElementById(`edit-form-${commentId}`).style.display = 'block';
+    }
+
+    function closeEditForm(commentId) {
+        document.getElementById(`edit-form-${commentId}`).style.display = 'none';
+    }
+</script>
+
 @endsection

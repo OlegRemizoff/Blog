@@ -25,5 +25,18 @@ class CommentController extends Controller
         return redirect()->back()->with('success', 'Комментарий добавлен');
     }
 
+    public function update(Request $request, Comment $comment) {
+        $request->validate([
+            'content' => 'required|string|max:1000',
+
+        ]);
+
+        $comment->update([
+            'content' => $request->input('content'),
+        ]);
+
+        return redirect()->back()->with('success', 'Комментарий обновлен');
+
+    }
 
 }

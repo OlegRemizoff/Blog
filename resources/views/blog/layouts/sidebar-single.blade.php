@@ -17,16 +17,16 @@
         <h3 class="widget-title">Social</h3>
         <div class="social">
             <a href="#" title="twitter">
-                <i class="fa fa-twitter"></i>
+                <i class="fab fa-twitter"></i>
             </a>
             <a href="#" title="facebook">
-                <i class="fa fa-facebook"></i>
+                <i class="fab fa-facebook-f"></i>
             </a>
             <a href="#" title="google plus">
-                <i class="fa fa-google-plus"></i>
+                <i class="fab fa-google-plus-g"></i>
             </a>
             <a href="#" title="Pinterest">
-                <i class="fa fa-pinterest"></i>
+                <i class="fab fa-pinterest"></i>
             </a>
         </div>
     </aside>
@@ -45,11 +45,11 @@
                 @foreach ($popular_posts as $pp)
                 <div class="post-item">
                     <div class="post-item-img">
-                        <a href="#"><img src="{{ $pp->getImage() }}" width="98" alt="blog-img" class="img-reponsive"></a>
+                        <a href="{{ route('posts.single', [$pp->slug]) }}"><img src="{{ $pp->getImage() }}" width="98" alt="blog-img" class="img-reponsive"></a>
                     </div>
                     <div class="post-item-text">
                         <div class="post-date">{{ $pp->getPostDate() }}</div>
-                        <h3><a href="#">{{ $pp->title }}</a></h3>
+                        <h3><a href="{{ route('posts.single', [$pp->slug]) }}">{{ $pp->title }}</a></h3>
                     </div>
                 </div>
                 @endforeach

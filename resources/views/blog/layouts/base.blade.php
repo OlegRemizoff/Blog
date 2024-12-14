@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="{{ asset('assets/blog/css/owl.theme.default.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/blog/css/style.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/blog/css/navbar.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/admin/plugins/fontawesome-free/css/all.min.css') }}"
+>
 </head>
 
 <body>

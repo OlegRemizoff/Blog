@@ -33,6 +33,7 @@ Route::get('/category/{slug}', [CategoryBlogController::class, 'index'])->name('
 Route::get('/tag/{slug}', [TagBlogController::class, 'index'])->name('posts.by.tag');
 Route::get('/search', [SearchController::class, 'index'])->name('search');
 Route::post('/comment', [CommentController::class, 'store'])->name('comment');
+Route::put('/comment/{comment}', [CommentController::class, 'update'])->name('comment.update');
 
 
 

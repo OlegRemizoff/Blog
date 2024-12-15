@@ -37,4 +37,10 @@ class RouteServiceProvider extends ServiceProvider
                 ->group(base_path('routes/web.php'));
         });
     }
+
+    /**
+     * Route::bind('comment', function ($value) {   // Route Model Binding
+     *   return Comment::where('slug', $value)->firstOrFail();
+     * });
+     */
 }

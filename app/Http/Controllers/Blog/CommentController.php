@@ -39,4 +39,11 @@ class CommentController extends Controller
 
     }
 
+
+    public function destroy(Request $request, Comment $comment) {
+        $comment->delete();
+        return redirect()->back()->with('error', 'Комментарий удален');
+
+    }
+
 }

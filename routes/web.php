@@ -34,6 +34,7 @@ Route::get('/tag/{slug}', [TagBlogController::class, 'index'])->name('posts.by.t
 Route::get('/search', [SearchController::class, 'index'])->name('search');
 Route::post('/comment', [CommentController::class, 'store'])->name('comment');
 Route::put('/comment/{comment}', [CommentController::class, 'update'])->name('comment.update');
+Route::delete('/comment/{comment}', [CommentController::class, 'destroy'])->name('comment.destroy');
 
 
 

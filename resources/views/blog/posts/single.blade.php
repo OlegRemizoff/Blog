@@ -144,6 +144,19 @@
                                                         </div>
                                                         @if (isset(auth()->user()->id) && auth()->user()->id == $comment->user_id)
                                                         <div class="comment-post-reply">
+                                                            <form method="post" action="{{ route('comment.destroy', $comment->id) }}">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit" id="delete-button-{{ $comment->id }}" style="display: none;" onclick="return confirm('Вы действительно хотите удалить комментарий?')"></button>
+
+                                                                <a href="#" class="comment-reply" onclick="document.getElementById('delete-button-{{ $comment->id }}').click(); return false;" class="btn btn-link">
+                                                                    <i class="fas fa-trash"></i>
+                                                                </a>
+                                                            </form>
+                                                            <!-- Ссылка <a> с обработчиком onclick вызывает метод .click() для скрытой кнопки. return false; предотвращает выполнение стандартного действия ссылки (переход по href). -->
+
+                                                        </div>
+                                                        <div class="comment-post-reply">
                                                             <p id="comment-content-{{ $comment->id }}"></p>
                                                             <a href="#" class="comment-reply" onclick="openEditForm({{ $comment->id }}); return false;"><i class="fas fa-cog"></i></a>
                                                         </div>
@@ -181,6 +194,7 @@
                                                 </li>
                                             </ul> -->
                                         </li>
+                                        <!-- Edit comment -->
                                         <div class="post-reply">
                                             <form id="edit-form-{{ $comment->id }}" method="post" action="{{ route('comment.update', $comment->id) }}" style="display: none;">
                                                 @csrf

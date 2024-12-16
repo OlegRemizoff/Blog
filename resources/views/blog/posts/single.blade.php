@@ -130,7 +130,7 @@
                                 <div class="post-comments">
                                     <h3 class="post-comments-title widget-title">Comments ({{ $post->comments()->count() }})</h3>
                                     <ul class="commentlist">
-                                        @foreach($post->comments as $comment)
+                                        @foreach($post->comments->whereNull('parent_id') as $comment)
                                         <li>
                                             <div class="comment">
                                                 <div class="avatar">
@@ -170,6 +170,11 @@
                                                     </div>
                                                 </div>
                                             </div>
+											<!-- Child comment -->
+											@if ($comment->children->count())
+											
+											@include('blog.layouts.comment', ['comments' => $comment->children])
+											@endif
                                             <!-- <ul class="comment-child">
                                                 <li>
                                                     <div class="comment">

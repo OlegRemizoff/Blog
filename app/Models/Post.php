@@ -42,7 +42,8 @@ class Post extends Model
 
     public function comments(): HasMany
     {
-        return $this->hasMany(Comment::class);
+        // return $this->hasMany(Comment::class);
+        return $this->hasMany(Comment::class)->whereNull('parent_id')->with('children');
     }
 
     public function getSlugOptions() : SlugOptions

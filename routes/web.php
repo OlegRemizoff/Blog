@@ -35,6 +35,7 @@ Route::get('/search', [SearchController::class, 'index'])->name('search');
 Route::post('/comment', [CommentController::class, 'store'])->name('comment');
 Route::put('/comment/{comment}', [CommentController::class, 'update'])->name('comment.update');
 Route::delete('/comment/{comment}', [CommentController::class, 'destroy'])->name('comment.destroy');
+Route::post('/reply', [CommentController::class, 'reply'])->name('reply');
 
 
 

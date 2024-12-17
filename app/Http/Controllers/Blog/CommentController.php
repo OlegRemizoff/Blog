@@ -46,4 +46,22 @@ class CommentController extends Controller
 
     }
 
+    
+    public function reply(Request $request) 
+    {
+        $request->validate([
+            'content' => 'required|string|max:1000',
+            'post_id' => 'required|exists:posts,id',
+            'parent_id' => 'nullable|exists:comments,id',
+        ]);
+
+        Comment::create([
+            'content' => $request->input('content'),
+            'user_id' => $request->input('user_id'),
+            'post_id' => $request->input('post_id'),
+            'parent_id' => $request->input('parent_id'),
+        ]);
+
+        return redirect()->back()->with('success', 'Комментарий добавлен');
+    }
 }

@@ -11,11 +11,11 @@
                 <div class="first-box">
                     <div class="comment-author-meta">
                         <strong>{{ $comment->user->name }}</strong>
-                        <div class="date">December 29, 2016</div>
+                        <div class="date">{{ $comment->getCommentDate() }}</div>
                     </div>
-                    <div class="comment-post-reply">
+                    <!-- <div class="comment-post-reply">
                         <a href="#" class="comment-reply">Reply</a>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="comment-content">
                     {{ $comment->content }}
@@ -25,3 +25,4 @@
     </li>
 </ul>
 @endforeach
+

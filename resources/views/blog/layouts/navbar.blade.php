@@ -14,20 +14,25 @@
                     <nav class="navbar main-menu">
                         <div class="collapse navbar-collapse" id="myNavbar">
                             <ul class="nav navbar-nav js-menubar">
-                                <li class="level1 active dropdown"><a href="{{ route('home') }}">Home</a>
+                                <li class="level1 active dropdown"><a href="{{ route('home') }}">Главная</a>
                                     <span class="plus js-plus-icon"></span>
                                 </li>
-                                <li class="level1 dropdown hassub"><a href="#">Shop</a>
+                                @if (auth()->user())
+                                <li class="level1 active dropdown">
+                                    <a href="{{ route('logout') }}">Выйти</a>
                                     <span class="plus js-plus-icon"></span>
                                 </li>
                                 <li class="level1 active dropdown">
-                                    <a href="#">Pages</a>
+                                    <a href="#">{{ auth()->user()->name }}</a>
                                     <span class="plus js-plus-icon"></span>
                                 </li>
+                                @else
                                 <li class="level1 active dropdown">
-                                    <a href="#">Elements</a>
+                                    <a href="{{ route('login.create') }}">Войти</a>
                                     <span class="plus js-plus-icon"></span>
                                 </li>
+                                @endif
+
                             </ul>
                         </div>
                     </nav>

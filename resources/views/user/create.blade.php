@@ -98,7 +98,7 @@
         </a>
       </div> -->
 
-            <a href="#" class="text-left ml-4">I already have a membership</a>
+            <!-- <a href="#" class="text-left ml-4">I already have a membership</a> -->
         </div>
         <!-- /.form-box -->
     </div><!-- /.card -->

@@ -69,6 +69,9 @@
             </div>
           </div> -->
                     <!-- /.col -->
+                    <div class="icheck-primary">
+                        Нет аккаунта? <a href="{{ route('register.create') }}">Регистрация</a>
+                    </div>
                     <div class="col-4 offset-8">
                         <button type="submit" class="btn btn-primary btn-block">Login</button>
                     </div>

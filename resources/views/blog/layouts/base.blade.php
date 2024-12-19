@@ -19,7 +19,6 @@
 
 <body>
     @yield('content')
-
     <a href="#" class="scroll_top">SCROLL TO TOP<span></span></a>
     <script src="{{ asset('assets/blog/js/jquery.js') }}"></script>
     <script src="{{ asset('assets/blog/js/bootstrap.js') }}"></script>

@@ -36,6 +36,8 @@ Route::post('/comment', [CommentController::class, 'store'])->name('comment');
 Route::put('/comment/{comment}', [CommentController::class, 'update'])->name('comment.update');
 Route::delete('/comment/{comment}', [CommentController::class, 'destroy'])->name('comment.destroy');
 Route::post('/reply', [CommentController::class, 'reply'])->name('reply');
+Route::get('/user', [UserController::class, 'profile'])->name('profile');
+Route::put('/user', [UserController::class, 'update'])->name('profile.update');
 
 
 

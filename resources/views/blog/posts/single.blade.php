@@ -134,7 +134,8 @@
                     <li>
                       <div class="comment">
                         <div class="avatar">
-                          <a href="#"><img src="{{ asset('assets/blog/img/blog/about5.jpg') }}" alt="images" class="img-responsive"></a>
+                          <a href="#"><img src="{{ $comment->user->getImage() }}" alt="images" class="img-responsive" width="96" ></a> 
+                          <!-- 146x146 -->
                         </div>
                         <div class="comment-box">
                           <div class="first-box">

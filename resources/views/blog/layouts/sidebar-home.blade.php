@@ -15,7 +15,6 @@
             </form>
         </aside>
     @endif
-
     <aside class="widget widget_social">
         <h3 class="widget-title">Social</h3>
         <div class="social">

@@ -22,6 +22,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'thumbnail',
     ];
 
     /**
@@ -44,14 +45,21 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+
     public function posts(): HasMany
     {
         return $this->hasMany(Post::class);
     }
 
+
     public function comments(): HasMany
     {
         return $this->hasMany(Comment::class);
+    }
+
+
+    public function getImage() {
+        return $this->thumbnail ? asset( 'uploads/' . $this->thumbnail) : asset('no-image.jpg');
     }
 
 }

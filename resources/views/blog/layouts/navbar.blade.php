@@ -23,7 +23,7 @@
                                     <span class="plus js-plus-icon"></span>
                                 </li>
                                 <li class="level1 active dropdown">
-                                    <a href="#">{{ auth()->user()->name }}</a>
+                                    <a href="{{ route('profile') }}">{{ auth()->user()->name }}</a>
                                     <span class="plus js-plus-icon"></span>
                                 </li>
                                 @else

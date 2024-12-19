@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -66,5 +67,42 @@ class UserController extends Controller
     {
         Auth::logout();
         return redirect()->route('home');
+    }
+
+
+    public function profile()
+    {
+        return view('user.profile');
+    }
+
+    public function update(Request $request)
+    {
+        $request->validate([
+            'thumbnail' => 'nullable|image',
+        ]);
+
+        $user_id = $request->input('user_id');
+        $user  = User::find($user_id);
+
+        
+        // if ($request->hasFile('thumbnail') && $request->file('thumbnail')->isValid()) {
+        //     Storage::disk('public')->deleteDirectory("avatars/user_{$user_id}");
+        //     $path = $request->file('thumbnail')->store("avatars/user_{$user_id}", 'public');
+        //     $user->update(['thumbnail' => $path]);
+        // }
+
+
+        if ($request->hasFile('thumbnail') && $request->file('thumbnail')->isValid()) {
+            if ($user->thumbnail && Storage::disk('public')->exists($user->thumbnail)) {
+                Storage::disk('public')->delete($user->thumbnail);
+            }
+            $path = $request->file('thumbnail')->store("avatars/", 'public');
+            $user->update(['thumbnail' => $path]);
+        }
+
+
+        
+        
+        return redirect()->back()->with('success', 'Изображение обновлено');
     }
 }

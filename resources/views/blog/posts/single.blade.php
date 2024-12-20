@@ -128,13 +128,15 @@
                                 </div> -->
                 @if ($post->comments()->count())
                 <div class="post-comments">
-                  <h3 class="post-comments-title widget-title">Comments ({{ $post->comments()->count() }})</h3>
+
+                  <h3 class="post-comments-title widget-title">Комментарии <i class="far fa-comment"></i> {{ $post->getAllCommentsCounter() }}</h3>
+
                   <ul class="commentlist">
                     @foreach($post->comments->whereNull('parent_id') as $comment)
                     <li>
                       <div class="comment">
                         <div class="avatar">
-                          <a href="#"><img src="{{ $comment->user->getImage() }}" alt="images" class="img-responsive" width="96" ></a> 
+                          <a href="#"><img src="{{ $comment->user->getImage() }}" alt="images" class="img-responsive" width="96"></a>
                           <!-- 146x146 -->
                         </div>
                         <div class="comment-box">
@@ -211,26 +213,26 @@
                     <!-- ./end child comment -->
                     @endforeach
                     <!-- <li>
-                                            <div class="comment">
-                                                <div class="avatar">
-                                                    <a href="#"><img src="{{ asset('assets/blog/img/blog/about5.jpg') }}" alt="images" class="img-responsive"></a>
-                                                </div>
-                                                <div class="comment-box">
-                                                    <div class="first-box">
-                                                        <div class="comment-author-meta">
-                                                            <strong>Darnell Patterson</strong>
-                                                            <div class="date">December 29, 2016</div>
-                                                        </div>
-                                                        <div class="comment-post-reply">
-                                                            <a href="#" class="comment-reply">Reply</a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="comment-content">
-                                                        Competently leverage other's resource maximizing e-commerce and customer directed benefits. Progressively communicate progressive communities without value-added expertise. Distinctively pursue enterprise action.
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li> -->
+                      <div class="comment">
+                        <div class="avatar">
+                          <a href="#"><img src="{{ asset('assets/blog/img/blog/about5.jpg') }}" alt="images" class="img-responsive"></a>
+                        </div>
+                        <div class="comment-box">
+                          <div class="first-box">
+                            <div class="comment-author-meta">
+                              <strong>Darnell Patterson</strong>
+                              <div class="date">December 29, 2016</div>
+                            </div>
+                            <div class="comment-post-reply">
+                              <a href="#" class="comment-reply">Reply</a>
+                            </div>
+                          </div>
+                          <div class="comment-content">
+                            Competently leverage other's resource maximizing e-commerce and customer directed benefits. Progressively communicate progressive communities without value-added expertise. Distinctively pursue enterprise action.
+                          </div>
+                        </div>
+                      </div>
+                    </li> -->
                   </ul>
                 </div>
                 @else

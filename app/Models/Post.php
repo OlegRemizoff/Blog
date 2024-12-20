@@ -73,4 +73,7 @@ class Post extends Model
         // return Carbon::parse($this->created_at)->diffForHumans();
     }
     
+    public function getAllCommentsCounter() {
+        return $this->hasMany(Comment::class)->with('children')->count(); 
+    }
 }

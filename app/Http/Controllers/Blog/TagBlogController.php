@@ -10,7 +10,7 @@ class TagBlogController extends Controller
 {
     public function index($slug) {
         $tag = Tag::where('slug', $slug)->firstOrFail();
-        $posts = $tag->posts()->withCount('comments')->get();
+        $posts = $tag->posts()->withCount('comments')->paginate(1);
         
         return view('blog.posts.tag', compact('posts'));
     }

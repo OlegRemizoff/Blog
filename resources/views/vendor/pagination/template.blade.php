@@ -49,18 +49,4 @@
 
 
 
-<!-- <div class="pagination-container pagination-blog">
-    <nav>
-        @if (is_string($element))
-        <ul class="pagination">
-            <li><a " href="{{ $element }}">1</a></li>
-        
-            <li>
-                <a href="#" aria-label="Previous">
-                    <i class="fa fa-angle-right" aria-hidden="true"></i>
-                </a>
-            </li>
-        </ul>
-        @endif
-    </nav>
-</div> -->
+

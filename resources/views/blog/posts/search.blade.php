@@ -105,7 +105,7 @@
 
                     <div class="pagination-container pagination-blog">
                         <nav>
-                        {{ $posts->links() }}
+                        {{ $posts->links('vendor.pagination.template') }}
                         </nav>
                     </div>
 

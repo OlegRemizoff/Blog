@@ -96,7 +96,7 @@
 
                     <div class="pagination-container pagination-blog">
                         <nav>
-                       {{-- {{ $posts->links('vendor.pagination.template', ['foo' => 'bar']) }} --}}
+                       {{-- {{ $posts->links('vendor.pagination.template') }} --}}
                         </nav>
                     </div>
 

@@ -3,8 +3,9 @@
         <div class="card">
             <div class="card-header" id="headingThree">
                 <h2 class="mb-0">
-                    <button class="btn btn-link " type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree"><i class="fas fa-comments"></i>
-                    {{ $comments->count() }}
+                    <button type="button" id="comment-three" data-toggle="collapse" data-target="#collapseThree" style="display: none;""></button>
+
+                <a href=" #" class="comment-post-reply" onclick="document.getElementById('comment-three').click(); return false;" class="btn btn-link"><span style="font-size: 12px;"><i class="fas fa-plus-square"></i> раскрыть ветку ({{ $comments->count() }})</span>
                     </button>
                 </h2>
             </div>
@@ -44,19 +45,19 @@
                                                     <button type="button" class="btn btn-cancel" onclick="closeEditForm({{ $comment->id }})">Cancel</button>
                                                 </form>
                                             </div>
-                                            <div class="comment-author-meta">
-                                                <strong>{{ $comment->user->name }}</strong>
-                                                <div class="date">{{ $comment->getCommentDate() }}</div>
-                                            </div>
                                             <!-- Edit Button -->
                                             <div class="comment-post-reply">
                                                 <p id="comment-content-{{ $comment->id }}"></p>
                                                 <a href="#" class="comment-reply" onclick="openEditForm({{ $comment->id }}); return false;"><i class="fas fa-cog"></i></a>
                                             </div>
-                                            <!-- <div class="comment-post-reply">
-                            <a href="#" class="comment-reply">Reply</a>
-                        </div> -->
+
                                             @endif
+
+                                            <div class="comment-author-meta">
+                                                <strong>{{ $comment->user->name }}</strong>
+                                                <div class="date">{{ $comment->getCommentDate() }}</div>
+                                            </div>
+
                                         </div>
                                     </div>
                                     <div class="comment-content">
@@ -72,3 +73,9 @@
         </div>
     </div>
 </div>
+
+<script>
+    function showTreeForm() {
+        document.getElementById(`comment-tree`).style.display = 'block';
+    }
+</script>

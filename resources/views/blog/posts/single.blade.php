@@ -62,14 +62,14 @@
                                 </div> -->
                 <div class="post-text">
                   <p>{!! $post->content !!}</p>
-                  <blockquote>
+                  <!-- <blockquote>
                     <p>There is only one happiness in this life, to love
                       <br> and be loved.
                     </p>
                     <p class="author">George Sand</p>
-                  </blockquote>
-                  <p>Professionally initiate alternative metrics before high standards in synergy. Quickly enable orthogonal technology for enabled sources. Dramatically evisculate functional web services via emerging human capital. Synergistically promote high-payoff niches and client-based niches. Appropriately mesh technically sound processes vis-a-vis exceptional meta-services.</p>
-                  <p>Intrinsicly re-engineer standards compliant potentialities with business process improvements. Authoritatively reinvent cross-unit catalysts for change before high-quality outsourcing. Uniquely predominate technically sound web-readiness rather than cost effective solutions. Phosfluorescently synergize.</p>
+                  </blockquote> -->
+                  <!-- <p>Professionally initiate alternative metrics before high standards in synergy. Quickly enable orthogonal technology for enabled sources. Dramatically evisculate functional web services via emerging human capital. Synergistically promote high-payoff niches and client-based niches. Appropriately mesh technically sound processes vis-a-vis exceptional meta-services.</p>
+                  <p>Intrinsicly re-engineer standards compliant potentialities with business process improvements. Authoritatively reinvent cross-unit catalysts for change before high-quality outsourcing. Uniquely predominate technically sound web-readiness rather than cost effective solutions. Phosfluorescently synergize.</p> -->
                 </div>
                 <!-- <div class="post-text">
                                     <p>Completely network high standards in innovation whereas goal-oriented paradigms. Intrinsicly morph human capital via enabled convergence. Objectively pursue leading-edge web-readiness before market-driven paradigms. Competently disseminate go forward "outside the box" thinking before proactive expertise. Quickly incubate effective schemas through future-proof users.</p>
@@ -261,12 +261,12 @@
                     <div class="form-group">
                       <div class="row">
                         <div class="col-md-12">
-                          <label>Leave a comment</label>
+                          <label>Оставить комментарий</label>
                           <textarea name="note" id="message" tabindex="2" required class="form-control"></textarea>
                         </div>
                       </div>
                     </div>
-                    <button type="submit" class="btn btn-submit">Submit</button>
+                    <button type="submit" class="btn btn-submit">Отправить</button>
                   </form>
                 </div>
                 @else

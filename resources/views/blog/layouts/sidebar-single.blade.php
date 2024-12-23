@@ -14,24 +14,25 @@
         </form>
     </aside>
     <aside class="widget widget_social">
-        <h3 class="widget-title">Social</h3>
+        <h3 class="widget-title">Контакты</h3>
         <div class="social">
-            <a href="#" title="twitter">
-                <i class="fab fa-twitter"></i>
+        <a title="Скачать резюме" download href="{{ asset('Resume.pdf') }}"><i class="far fa-file"></i></a>
+            <a href="https://t.me/rem1zoff_oleg" title="Телеграм" target="_blank">
+                <i class="fab fa-telegram-plane"></i>
             </a>
-            <a href="#" title="facebook">
-                <i class="fab fa-facebook-f"></i>
-            </a>
-            <a href="#" title="google plus">
+
+            <a title="Скопировать почту" href="#" onclick="copyEmail(event, 'job.rem1zoff@gmail.com')">
                 <i class="fab fa-google-plus-g"></i>
             </a>
-            <a href="#" title="Pinterest">
-                <i class="fab fa-pinterest"></i>
+
+            <a href="https://github.com/OlegRemizoff" title="Git" target="_blank">
+                <i class="fab fa-github"></i>
             </a>
+
         </div>
     </aside>
     <aside class="widget widget_category">
-        <h3 class="widget-title">Categories</h3>
+        <h3 class="widget-title">Категории</h3>
         <ul>
         @foreach ($cats as $cat)
             <li><a href="{{ route('posts.by.category', [$cat->slug]) }}" >{{ $cat->title }}</a>{{ $cat->posts_count }}</li>
@@ -39,7 +40,7 @@
         </ul>
     </aside>
     <aside class="widget widget_popular_posts">
-        <h3 class="widget-title">Popular Posts</h3>
+        <h3 class="widget-title">Популярные посты</h3>
         <div class="post-item-list">
             @if ($popular_posts->count() > 0)
                 @foreach ($popular_posts as $pp)
@@ -119,7 +120,7 @@
     </aside> -->
     @if ($post->tags->count() > 0)
         <aside class="widget widget_tags">
-            <h3 class="widget-title">Tags</h3>
+            <h3 class="widget-title">Теги</h3>
             <div class="content">
             @foreach ($post->tags as $tag)
                 <a href="{{ route('posts.by.tag', [$tag->slug]) }}" title="news">{{ $tag->title }}</a>
@@ -128,7 +129,7 @@
         </aside>
     @else
         <aside class="widget widget_tags">
-            <h3 class="widget-title">Tags</h3>
+            <h3 class="widget-title">Теги</h3>
             <div class="content">
                 <a href="#" title="design" class="active">Design</a>
                 <a href="#" title="design" class="active">Fashion</a>
@@ -137,3 +138,34 @@
         </aside>
     @endif
 </div>
+
+<!-- copy gmail -->
+<script>
+    function copyEmail(event, email) {
+        event.preventDefault(); // Предотвращаем переход по ссылке
+
+        // Проверяем поддержку clipboard
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(email)
+                .then(() => {
+                    alert('Почта скопирована: ' + email);
+                })
+                .catch(err => {
+                    console.error('Ошибка копирования: ', err);
+                });
+        } else {
+            // Fallback для старых браузеров
+            const textarea = document.createElement('textarea');
+            textarea.value = email;
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+                document.execCommand('copy');
+                alert('Почта скопирована: ' + email);
+            } catch (err) {
+                console.error('Ошибка копирования (fallback): ', err);
+            }
+            document.body.removeChild(textarea);
+        }
+    }
+</script>

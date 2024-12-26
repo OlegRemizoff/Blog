@@ -34,7 +34,7 @@
                                 <div class="categories">
                                     <a href="{{ route('posts.by.category', [$post->category->slug]) }}" rel="category tag">Категория -> {{ $post->category->title }}</a>
                                 </div>
-                                <span class="post-comments-number">{{ $post->getAllCommentsCounter() }}</span>
+                                <span class="post-comments-number">{{ $post->total_comments }}</span>
                             </div>
                         </div>
                         @endforeach

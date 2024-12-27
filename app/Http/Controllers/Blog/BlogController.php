@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Blog;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
-use App\Models\Tag;
+use App\Models\Comment;
+
 
 class BlogController extends Controller
 {
@@ -19,11 +20,25 @@ class BlogController extends Controller
         return view('blog.posts.index', compact('posts'));
     }
 
+    
     public function show($slug) 
     {
-        $post = Post::where('slug', $slug)->firstOrFail();
-        $post->views += 1;
-        $post->update();
+        $post = Post::with([
+            'user',
+            'comments.user',
+            'comments.children.user',
+        ])->where('slug', $slug)->firstOrFail();
+
+        $post->parent = $post->comments->whereNull('parent_id');
+        $post->children = $post->comments->flatMap(function ($parent) {
+            return $parent->children;
+        });
+        
+        // $post->setAttribute('parent', $post->comments->whereNull('parent_id')); // не участвуют в save или update
+        // $parentsComments = Comment::where('post_id', $post->id)->whereNull('parent_id')->get();
+        // $childrenComments = Comment::where('post_id', $post->id)->whereNotNull('parent_id')->get();
+
+        $post->increment('views');
         return view('blog.posts.single', compact('post'));
     }
 

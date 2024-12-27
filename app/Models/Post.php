@@ -23,7 +23,7 @@ class Post extends Model
     use HasFactory;
     use HasSlug;
 
-    protected $fillable = ['title', 'description', 'content', 'category_id',  'tag_id', 'thumbnail', 'user_id'];
+    protected $fillable = ['title', 'description', 'content', 'category_id',  'tag_id', 'thumbnail', 'user_id', ];
 
     public function user(): BelongsTo
     {
@@ -73,7 +73,4 @@ class Post extends Model
         // return Carbon::parse($this->created_at)->diffForHumans();
     }
     
-    public function getAllCommentsCounter() {
-        return $this->hasMany(Comment::class)->with('children')->count(); 
-    }
 }

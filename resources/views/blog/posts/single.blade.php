@@ -126,13 +126,12 @@
                                         </div>
                                     </div>
                                 </div> -->
-                @if ($post->comments()->count())
+                @if ($post->parent->count())
                 <div class="post-comments">
 
-                  <h3 class="post-comments-title widget-title">Комментарии <i class="far fa-comment"></i> {{ $post->getAllCommentsCounter() }}</h3>
-
+                  <h3 class="post-comments-title widget-title">Комментарии <i class="far fa-comment"></i> {{ $post->parent->count() + $post->children->count() }}</h3>
                   <ul class="commentlist">
-                    @foreach($post->comments->whereNull('parent_id') as $comment)
+                    @foreach($post->parent as $comment)
                     <li>
                       <div class="comment">
                         <div class="avatar">
@@ -207,8 +206,8 @@
                     @endif
                     <!-- ./end reply comment -->
                     <!-- Child comment -->
-                    @if ($comment->children->count())
-                    @include('blog.layouts.comment', ['comments' => $comment->children])
+                    @if ($post->parent->count())
+                    @include('blog.layouts.comment', ['comments' => $post->children])
                     @endif
                     <!-- ./end child comment -->
                     @endforeach

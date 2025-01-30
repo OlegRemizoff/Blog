@@ -14,7 +14,10 @@
             <div class="row">
                 <div class="main-content col-xs-12 col-md-8">
                     <div class="blog-post-container blog-page">
-                        @foreach($posts as $post)
+                    <div id="search-results">
+
+
+                    @foreach($posts as $post)
                         <div class="blog-post-item">
                             <div class="blog-post-img">
                                 <a class="hover-images" href="#"><img src="{{ $post->getImage() }}" class="img-reponsive" alt="blog-img"></a>
@@ -38,62 +41,9 @@
                             </div>
                         </div>
                         @endforeach
-                        <!-- <div class="blog-item-list">
-                            <div class="blog-post-item post-item">
-                                <div class="blog-post-img">
-                                    <a class="hover-images" href="#"><img src="{{ asset('assets/blog/img/blog/1_sm.jpg') }}" alt="blog-img" class="img-reponsive"></a>
-                                </div>
-                                <div class="blog-post-info">
-                                    <div class="post-date">FEBRUARY 22, 2017</div>
-                                    <h3 class="post-name"><a href="#">The Must Have Neutral Layers for Spring</a></h3>
-                                    <p>Cteractively pontificate efficient growth strategies via innovative information. Phosfluorescently cultivate installed base total linkage after impactful technology. Objectively repurpose...</p>
-                                    <div class="post-metas">
-                                        <div class="categories">
-                                            <a href="#" rel="category tag">BEAUTY</a>,
-                                            <a href="#" rel="category tag">FASHION</a>
-                                        </div>
-                                        <span class="post-comments-number">3</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="blog-post-item post-item">
-                                <div class="blog-post-img">
-                                    <a class="hover-images" href="#"><img src="{{ asset('assets/blog/img/blog/2_sm.jpg') }}" alt="blog-img" class="img-reponsive"></a>
-                                </div>
-                                <div class="blog-post-info">
-                                    <div class="post-date">February 22, 2017</div>
-                                    <h3 class="post-name"><a href="#">Giving the design and production</a></h3>
-                                    <p>Cteractively pontificate efficient growth strategies via innovative information. Phosfluorescently cultivate installed base total linkage after impactful technology. Objectively repurpose...</p>
-                                    <div class="post-metas">
-                                        <div class="categories">
-                                            <a href="#" rel="category tag">BEAUTY</a>,
-                                            <a href="#" rel="category tag">FASHION</a>
-                                        </div>
-                                        <span class="post-comments-number">3</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="blog-post-item post-item">
-                                <div class="blog-post-img">
-                                    <a class="hover-images" href="#"><img src="{{ asset('assets/blog/img/blog/3_sm.jpg') }}" alt="blog-img" class="img-reponsive"></a>
-                                </div>
-                                <div class="blog-post-info">
-                                    <div class="post-date">February 22, 2017</div>
-                                    <h3 class="post-name"><a href="#">A planner tool to help coordinate</a></h3>
-                                    <p>Cteractively pontificate efficient growth strategies via innovative information. Phosfluorescently cultivate installed base total linkage after impactful technology. Objectively repurpose...</p>
-                                    <div class="post-metas">
-                                        <div class="categories">
-                                            <a href="#" rel="category tag">BEAUTY</a>,
-                                            <a href="#" rel="category tag">FASHION</a>
-                                        </div>
-                                        <span class="post-comments-number">3</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
-
                     </div>
 
+                    </div>
                     <div class="pagination-container pagination-blog">
                         <nav>
                         {{ $posts->links('vendor.pagination.template') }}

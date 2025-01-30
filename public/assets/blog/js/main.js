@@ -1,3 +1,79 @@
+// Search
+let csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+const sField = document.getElementById('search');
+const blogContent = document.querySelector('.blog-page');
+sField.addEventListener('input', (e) => {
+    let search = e.target.value.trim();
+
+    if (search.length < 3) {
+        blogContent.innerHTML = '';
+        return;
+    }
+
+    fetch("/search", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'X-CSRF-TOKEN': csrfToken  
+        },
+        body: JSON.stringify({ search: search })
+    })
+    .then(response => response.json())
+    .then(data => {
+        // console.log(data);
+        renderPosts(data);
+    })
+    .catch(error => console.error('Ошибка при загрузке данных:', error));
+});
+
+// Функция для рендеринга постов
+function renderPosts(posts) {
+    blogContent.innerHTML = '';
+
+    if (posts.length === 0) {
+        blogContent.innerHTML = '<p>Ничего не найдено</p>';
+        return;
+    }
+
+    // Добавляет все элементы за один раз (уменьшает количество перерисовок DOM)
+    let fragment = document.createDocumentFragment();
+
+    posts.forEach(post => {
+        let postElement = document.createElement('div');
+        postElement.classList.add('blog-post-item');
+
+        postElement.innerHTML = `
+            <div class="blog-post-img">
+                <a class="hover-images" href="#"><img src="${post.image}" class="img-reponsive" alt="blog-img"></a>
+            </div>
+            <div class="blog-post-info">
+                <div class="post-date">
+                    ${post.post_date} / 👁 ${post.views}
+                </div>
+                <h3 class="post-name">
+                    <a href="/article/${post.slug}">${post.title}</a>
+                </h3>
+                <p class="post-desc">${post.description}</p>
+                <a href="/article/${post.slug}" class="readmore">Read more</a>
+            </div>
+            <div class="post-metas">
+                <div class="categories">
+                    <a href="/category/${post.category_slug}" rel="category tag">Категория -> ${post.category_title}</a>
+                </div>
+                <span class="post-comments-number">${post.total_comments}</span> 
+            </div>
+        `;
+
+        fragment.appendChild(postElement);
+    });
+
+    blogContent.appendChild(fragment);
+}
+
+
+
+
 jQuery(document).ready(function($) {
     "use strict";
 

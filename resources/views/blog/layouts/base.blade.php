@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@section('title')Blog |@show</title>
     <link rel="shortcut icon" href="{{ asset('assets/blog/img/favicon.png') }}" type="image/png">
     <link rel="stylesheet" href="{{ asset('assets/blog/css/slick.css') }}">

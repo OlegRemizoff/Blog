@@ -31,7 +31,7 @@ Route::get('/', [BlogController::class, 'index'])->name('home');
 Route::get('/article/{slug}', [BlogController::class, 'show'])->name('posts.single');
 Route::get('/category/{slug}', [CategoryBlogController::class, 'index'])->name('posts.by.category');
 Route::get('/tag/{slug}', [TagBlogController::class, 'index'])->name('posts.by.tag');
-Route::get('/search', [SearchController::class, 'index'])->name('search');
+Route::post('/search', [SearchController::class, 'index'])->name('search');
 Route::post('/comment', [CommentController::class, 'store'])->name('comment');
 Route::put('/comment/{comment}', [CommentController::class, 'update'])->name('comment.update');
 Route::delete('/comment/{comment}', [CommentController::class, 'destroy'])->name('comment.destroy');

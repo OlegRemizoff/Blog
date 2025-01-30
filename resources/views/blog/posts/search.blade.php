@@ -1,3 +1,5 @@
+
+
 @extends('blog.layouts.base')
 
 @section('title')@parent {{ $s }} @endsection

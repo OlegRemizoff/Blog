@@ -30,11 +30,16 @@
             <h3 class="card-title">Список статей</h3>
           </div>
           <!-- /.card-header -->
+
+          <div class="input-group" data-widget="sidebar-search">
+            <input class="form-control form-control-sidebar" id="admin-index-search" type="search" placeholder="Search" aria-label="Search">
+          </div>
+        
           <div class="card-body">
             <a href="{{ route('admin.posts.create') }}" class="btn btn-primary mb-3">Добавить статью</a>
             @if (count($posts))
             <div class="table-responsive">
-              <table class="table table-bordered table-hover text-nowrap">
+              <table class="table table-bordered table-hover text-nowrap index-table">
                 <thead>
                   <tr>
                     <th style="width: 30px">#</th>

@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\HeroImageController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\AdminSearchController;
 
 use App\Http\Controllers\Blog\SearchController;
 use App\Http\Controllers\Blog\BlogController;
@@ -45,9 +46,11 @@ Route::middleware('admin')->prefix('admin')->name('admin.')->group(function() {
     Route::get('/', [MainController::class, 'index'])->name('index');
     Route::get('/heroimage', [HeroImageController::class, 'index'])->name('hero.image');
     Route::post('/heroimage', [HeroImageController::class, 'store'])->name('hero.image.store');
+    Route::post('/search', [AdminSearchController::class, 'index']);
     Route::resource('categories', CategoryController::class);
     Route::resource('tags', TagController::class);
     Route::resource('posts', PostController::class);
+
 });
 
 

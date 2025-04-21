@@ -30,6 +30,7 @@ use App\Http\Controllers\Blog\CommentController;
 
 Route::get('/', [BlogController::class, 'index'])->name('home');
 Route::get('/article/{slug}', [BlogController::class, 'show'])->name('posts.single');
+Route::get('/test', [BlogController::class, 'test'])->name('test');
 Route::get('/category/{slug}', [CategoryBlogController::class, 'index'])->name('posts.by.category');
 Route::get('/tag/{slug}', [TagBlogController::class, 'index'])->name('posts.by.tag');
 Route::post('/search', [SearchController::class, 'index'])->name('search');
@@ -39,6 +40,7 @@ Route::delete('/comment/{comment}', [CommentController::class, 'destroy'])->name
 Route::post('/reply', [CommentController::class, 'reply'])->name('reply');
 Route::get('/user', [UserController::class, 'profile'])->name('profile');
 Route::put('/user', [UserController::class, 'update'])->name('profile.update');
+
 
 
 

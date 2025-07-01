@@ -32,6 +32,7 @@
                                     <span class="plus js-plus-icon"></span>
                                 </li>
                                 @endif
+                                <li class="level1 active dropdown"><a href="{{ route('test') }}">Тестовое</a>
 
                             </ul>
                         </div>

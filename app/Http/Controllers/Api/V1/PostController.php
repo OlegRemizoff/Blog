@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
+use App\Http\Resources\V1\PostResource;
 use App\Models\Post;
 
 class PostController extends Controller
@@ -14,7 +15,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        return Post::all();
+        // return Post::all();
+        return PostResource::collection(Post::with('category', 'tags')->paginate(5));
     }
 
     /**
@@ -22,10 +24,9 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-        Post::create($request->all());
-        return response()->json(
-            ['message' => "Post has been created"], 200
-        );
+        // Post::create($request->all());
+        return new PostResource(Post::create($request->all()));
+
     }
 
     /**
@@ -34,14 +35,13 @@ class PostController extends Controller
     public function show(Post $post)
     {
         
-        return response()->json([
-            "id" => $post->id,
-            "title" => $post->title,
-            "content" => $post->content,
-            "created_at" => $post->created_at
-        ]);
-        // var_dump($post->title);
-        // return $post;
+        // return response()->json([
+        //     "id" => $post->id,
+        //     "title" => $post->title,
+        //     "content" => $post->content,
+        //     "created_at" => $post->created_at
+        // ]);
+        return new PostResource($post);
     }
 
     /**

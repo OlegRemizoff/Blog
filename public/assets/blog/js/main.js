@@ -1,30 +1,7 @@
 // Search
 let csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-
 const sField = document.getElementById('search');
 const blogContent = document.querySelector('.blog-page');
-
-const adminIndexSearch = document.getElementById('admin-index-search');
-
-adminIndexSearch.addEventListener('input', (e) => {
-    let find = e.target.value.trim();
-    console.log(find);
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 sField.addEventListener('input', (e) => {
     let search = e.target.value.trim();
 
@@ -33,6 +10,7 @@ sField.addEventListener('input', (e) => {
         return;
     }
 
+    console.log(search)
     fetch("/search", {
         method: 'POST',
         headers: {

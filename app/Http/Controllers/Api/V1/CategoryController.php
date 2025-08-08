@@ -5,6 +5,10 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
+<<<<<<< HEAD
+=======
+use App\Http\Resources\V1\CategoryResource;
+>>>>>>> api_v1
 use App\Models\Category;
 
 class CategoryController extends Controller
@@ -14,7 +18,13 @@ class CategoryController extends Controller
      */
     public function index()
     {
+<<<<<<< HEAD
         return Category::all();
+=======
+        // return Category::all();
+        return CategoryResource::collection(Category::all());
+        
+>>>>>>> api_v1
     }
 
     /**
@@ -22,7 +32,11 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
+<<<<<<< HEAD
         Category::create($request->all());
+=======
+        return new CategoryResource(Category::create($request->all()));
+>>>>>>> api_v1
     }
 
     /**
@@ -39,6 +53,10 @@ class CategoryController extends Controller
     public function update(UpdateCategoryRequest $request, Category $category)
     {
         $category->update($request->all());
+<<<<<<< HEAD
+=======
+        return new CategoryResource($category);
+>>>>>>> api_v1
     }
 
     /**
@@ -47,8 +65,14 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         $category->delete();
+<<<<<<< HEAD
         return response()->json([
             "message" => "Category removed"
         ]);
+=======
+        return response()->json(
+            ["message" => "category has been deleted"]
+        );
+>>>>>>> api_v1
     }
 }

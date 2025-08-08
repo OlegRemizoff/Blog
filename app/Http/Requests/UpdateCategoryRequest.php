@@ -22,7 +22,11 @@ class UpdateCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
+<<<<<<< HEAD
             'title' => ['required', 'string']
+=======
+            "title" => ['required', 'string']
+>>>>>>> api_v1
         ];
     }
 }

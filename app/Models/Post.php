@@ -25,6 +25,9 @@ class Post extends Model
 
     protected $fillable = ['title', 'description', 'content', 'category_id',  'tag_id', 'thumbnail', 'user_id', ];
 
+    // поля исключаются из методов toJson и toArray;
+    protected $hidden = ['created_at', 'updated_at']; 
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

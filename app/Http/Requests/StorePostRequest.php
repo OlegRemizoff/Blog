@@ -22,7 +22,18 @@ class StorePostRequest extends FormRequest
     public function rules(): array
     {
         return [
+<<<<<<< HEAD
             ''
+=======
+            "title" => ['required', 'string', 'max:255'],
+            "slug" => ['required', 'string', 'max:255'],
+            "description" => ['string'],
+            "content" => ['string'],
+            "category_id" => ['required', 'exists:categories,id', 'integer'],
+            "views" => ['integer'],
+            "thumbnail" => ['string'],
+            "user_id" => ['required', 'integer'],
+>>>>>>> api_v1
         ];
     }
 }

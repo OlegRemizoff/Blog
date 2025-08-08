@@ -6,8 +6,11 @@ use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
 use App\Models\HeroImage;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Cache\RateLimiting\Limit;
+use Illuminate\Support\Facades\RateLimiter;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,6 +27,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+
+        RateLimiter::for('api', function (Request $request) {
+            return Limit::perMinute(3)->by($request->user()?->id ?: $request->ip());
+        });
 
         view()->composer(['blog.layouts.sidebar-single', 'blog.layouts.sidebar-home'], function($view) { 
             if (Cache::has('cats')) {

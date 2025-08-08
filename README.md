@@ -15,3 +15,74 @@
     </a>
 </p>
 
+
+
+## API
+
+### Получение  всех постов 
+- URL: `/api/v1/posts`
+- Метод: GET
+- Описание: Получить список всех записей.
+
+### Получение  поста
+- URL: `/api/v1/posts/{id}`
+- Метод: GET
+- Описание: просмотр отдельной записи
+
+
+
+### Создание поста
+- URL: `/api/v1/posts`
+- Метод: POST
+- Описание: создать новую запись
+- Параметры:
+  - `title` (обязательный) - заголовок
+  - `slug` (обязательный) - slug
+  - `description` - краткое описание
+  - `content`  - текст
+  - `category_id`(обязательный)  - id категории
+  - `thumbnail`  - изображение
+  - `"user_id": 1` (обязательный)
+
+```json
+    {
+        "title": "new PostResource create",
+        "slug": "new-post-resource-create",
+        "description": "blablabla",
+        "content": "Something text",
+        "category_id": 3,
+        "thumbnail": "nope",
+        "user_id": 1
+    }
+
+```
+#### Результат
+<p align="center">
+        <img  src="/public/api_create.gif" title="...">
+    </a>
+</p>
+
+### Обновление поста
+- URL: `/api/v1/posts/{id}`
+- Метод: PUT, PATCH
+- Описание: создать новую книгу
+```json
+    {
+        "title": "update Post",
+        "slug": "update-post",
+        "description": "blablabla",
+        "content": "Something text",
+        "category_id": 3,
+        "thumbnail": "nope",
+        "user_id": 1
+    }
+```
+
+### Удаление поста
+- URL: `/api/v1/posts/{id}`
+- Метод: DELETE
+- Описание: удалить выбранную запись по id
+```json
+  Пример успешного ответа: Status: 204 No Content
+```
+

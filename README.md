@@ -7,14 +7,7 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## [Перейти на сайт](http://f1067316.xsph.ru/)
-### Админка
-<p align="center">
-    <a href="http://f1067316.xsph.ru/" target="_blank" rel="noopener noreferrer">
-        <img  src="blog_admin.png" title="Админка">
-    </a>
-</p>
-
+## [Перейти на сайт](https://quipo.byethost17.com/)
 
 
 ## API
@@ -64,8 +57,8 @@
 
 ### Обновление поста
 - URL: `/api/v1/posts/{id}`
-- Метод: PUT, PATCH
-- Описание: создать новую книгу
+- Метод: PUT
+- Описание: обновить запись
 ```json
     {
         "title": "update Post",
